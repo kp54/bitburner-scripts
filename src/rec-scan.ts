@@ -1,22 +1,16 @@
+import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
-/** @type {Set<string>} */
-const results = new Set();
+const results = new Set<string>();
 
-/**
- * @param {NS} ns
- * @param {string} host
- * @param {string[]} path
- */
-const work = async (ns, host, path) => {
+const work = async (ns: NS, host: string, path: string[]) => {
   if (!host.startsWith("pserv-") && 0 < path.length) {
     const prev = path.slice(-1)[0];
     results.add(`"${prev}" -> "${host}";`);
   }
 };
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   await walk(ns, work);
   ns.tprint(`\ndigraph G {\n${Array.from(results).join("\n")}\n}\n`);
 };

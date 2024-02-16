@@ -1,10 +1,7 @@
+import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
-/**
- * @param {NS} ns
- * @param {string} host
- */
-const scrape = async (ns, host) => {
+const scrape = async (ns: NS, host: string) => {
   if (host === ns.getHostname()) {
     return;
   }
@@ -13,7 +10,6 @@ const scrape = async (ns, host) => {
   ns.scp(files, "home", host);
 };
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   await walk(ns, scrape);
 };

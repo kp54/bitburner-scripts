@@ -1,5 +1,6 @@
-/** @param {NS} ns */
-export const main = async (ns) => {
+import { NS } from "@ns";
+
+export const main = async (ns: NS) => {
   if (ns.args.length !== 1) {
     ns.tprint("usage: add-pserv TARGET");
     return;

@@ -1,18 +1,14 @@
+import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   const home = ns.getHostname();
   const thres = 2;
 
   let all = 0;
   let avail = 0;
 
-  /**
-   * @param {NS} ns
-   * @param {string} host
-   */
-  const work = (ns, host) => {
+  const work = (ns: NS, host: string) => {
     if (host === home) {
       return;
     }

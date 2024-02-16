@@ -1,8 +1,8 @@
+import { NS } from "@ns";
 import { openNuke } from "lib/hack-kit";
 import { walk } from "lib/net-walker";
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   if (ns.args.length !== 1) {
     ns.tprint("usage: auto-deploy TARGET");
     return;
@@ -11,14 +11,9 @@ export const main = async (ns) => {
   const script = "hack.js";
   const target = String(ns.args[0]);
 
-  /** @type {Set<string>} */
-  const knownHosts = new Set();
+  const knownHosts = new Set<string>();
 
-  /**
-   * @param {NS} ns
-   * @param {string} host
-   */
-  const deploy = (ns, host) => {
+  const deploy = (ns: NS, host: string) => {
     if (knownHosts.has(host)) {
       return;
     }
@@ -38,11 +33,7 @@ export const main = async (ns) => {
     ns.exec(script, host, { threads: capacity }, target);
   };
 
-  /**
-   * @param {NS} ns
-   * @param {string} host
-   */
-  const work = async (ns, host) => {
+  const work = async (ns: NS, host: string) => {
     if (host === ns.getHostname()) {
       return;
     }

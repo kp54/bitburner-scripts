@@ -1,15 +1,9 @@
-/**
- * @param {NS} ns
- * @param {string} host
- */
-export const canHack = (ns, host) =>
+import { NS } from "@ns";
+
+export const canHack = (ns: NS, host: string) =>
   ns.getServerRequiredHackingLevel(host) <= ns.getHackingLevel();
 
-/**
- * @param {NS} ns
- * @param {string} host
- */
-export const openNuke = (ns, host) => {
+export const openNuke = (ns: NS, host: string) => {
   if (ns.hasRootAccess(host)) {
     return true;
   }

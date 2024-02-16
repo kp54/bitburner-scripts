@@ -10,13 +10,11 @@ How many different distinct ways can the number 110 be written as a sum of integ
 You may use each integer in the set zero or more times.
 */
 
+import { NS } from "@ns";
+
 const ARR = [1, 5, 6, 8, 9, 10, 11, 13, 15];
 
-/**
- * @param {number[]} arr
- * @param {number} picks
- */
-const sum = (arr, picks) => {
+const sum = (arr: number[], picks: number) => {
   let shift = 0;
   let result = 0;
   let mask = 1;
@@ -33,8 +31,7 @@ const sum = (arr, picks) => {
   return result;
 };
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   let ways = 0;
 
   for (let i = 0; i < 2 << ARR.length; i++) {

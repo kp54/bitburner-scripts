@@ -1,7 +1,8 @@
-/** @param {NS} ns */
-export const main = async (ns) => {
+import { NS } from "@ns";
+
+export const main = async (ns: NS) => {
   if (ns.args.length !== 2) {
-    ns.trpint("usage: calc-upgrade SERVER SIZE");
+    ns.tprint("usage: calc-upgrade SERVER SIZE");
     return;
   }
 

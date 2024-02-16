@@ -1,13 +1,9 @@
+import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
 const logs = new Array("<deep-ls>");
 
-/**
- * @param {NS} ns
- * @param {string} host
- * @param {string[]} path
- */
-const list = async (ns, host, path) => {
+const list = async (ns: NS, host: string, path: string[]) => {
   if (host === ns.getHostname()) {
     return;
   }
@@ -25,8 +21,7 @@ const list = async (ns, host, path) => {
   logs.push(...lines);
 };
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   await walk(ns, list);
   ns.tprint(logs.join("\n"));
 };

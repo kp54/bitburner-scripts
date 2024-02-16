@@ -1,16 +1,12 @@
+import { NS } from "@ns";
 import { canHack, openNuke } from "lib/hack-kit";
 import { walk } from "lib/net-walker";
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   let current_max = 0;
   let current_host = "(none)";
 
-  /**
-   * @param {NS} ns
-   * @param {string} host
-   */
-  const work = async (ns, host) => {
+  const work = async (ns: NS, host: string) => {
     if (!canHack(ns, host) || !openNuke(ns, host)) {
       return;
     }

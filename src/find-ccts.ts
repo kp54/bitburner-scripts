@@ -1,13 +1,9 @@
+import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
 const logs = [""];
 
-/**
- * @param {NS} ns
- * @param {string} host
- * @param {string[]} path
- */
-const work = async (ns, host, path) => {
+const work = async (ns: NS, host: string, path: string[]) => {
   if (host === ns.getHostname()) {
     return;
   }
@@ -21,8 +17,7 @@ const work = async (ns, host, path) => {
   }
 };
 
-/** @param {NS} ns */
-export const main = async (ns) => {
+export const main = async (ns: NS) => {
   await walk(ns, work);
   ns.tprint(logs.join("\n"));
 };
