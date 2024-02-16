@@ -9,7 +9,7 @@ const results = new Set();
  * @param {string[]} path
  */
 const work = async (ns, host, path) => {
-  if (!host.startsWith('pserv-') && 0 < path.length) {
+  if (!host.startsWith("pserv-") && 0 < path.length) {
     const prev = path.slice(-1)[0];
     results.add(`"${prev}" -> "${host}";`);
   }
@@ -18,6 +18,5 @@ const work = async (ns, host, path) => {
 /** @param {NS} ns */
 export const main = async (ns) => {
   await walk(ns, work);
-
-  ns.tprint('\ndigraph G {\n' + Array.from(results).join('\n') + '\n}\n');
+  ns.tprint(`\ndigraph G {\n${Array.from(results).join("\n")}\n}\n`);
 };

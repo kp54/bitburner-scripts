@@ -15,23 +15,23 @@ export const openNuke = (ns, host) => {
   }
 
   let openPorts = 0;
-  if (ns.fileExists('BruteSSH.exe')) {
+  if (ns.fileExists("BruteSSH.exe")) {
     ns.brutessh(host);
     openPorts += 1;
   }
-  if (ns.fileExists('FTPCrack.exe')) {
+  if (ns.fileExists("FTPCrack.exe")) {
     ns.ftpcrack(host);
     openPorts += 1;
   }
-  if (ns.fileExists('relaySMTP.exe')) {
+  if (ns.fileExists("relaySMTP.exe")) {
     ns.relaysmtp(host);
     openPorts += 1;
   }
-  if (ns.fileExists('HTTPWorm.exe')) {
+  if (ns.fileExists("HTTPWorm.exe")) {
     ns.httpworm(host);
     openPorts += 1;
   }
-  if (ns.fileExists('SQLInject.exe')) {
+  if (ns.fileExists("SQLInject.exe")) {
     ns.sqlinject(host);
     openPorts += 1;
   }

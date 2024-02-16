@@ -1,7 +1,7 @@
 /** @param {NS} ns */
 export const main = async (ns) => {
   if (ns.args.length !== 1) {
-    ns.tprint('usage: weaken TARGET');
+    ns.tprint("usage: weaken TARGET");
     return;
   }
 

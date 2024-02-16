@@ -9,9 +9,8 @@ const scrape = async (ns, host) => {
     return;
   }
 
-  const files = ns.ls(host)
-    .filter(x => x.endsWith('.lit'));
-  ns.scp(files, 'home', host);
+  const files = ns.ls(host).filter((x) => x.endsWith(".lit"));
+  ns.scp(files, "home", host);
 };
 
 /** @param {NS} ns */

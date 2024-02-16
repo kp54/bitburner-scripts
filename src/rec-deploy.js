@@ -1,9 +1,9 @@
-import { walk } from "lib/net-walker";
 import { openNuke } from "lib/hack-kit";
+import { walk } from "lib/net-walker";
 
 /** @param {NS} ns */
 const usage = (ns) => {
-  ns.tprint('usage: rec-deploy FILE [ARGS...]');
+  ns.tprint("usage: rec-deploy FILE [ARGS...]");
 };
 
 /** @param {NS} ns */
@@ -29,7 +29,9 @@ export const main = async (ns) => {
     ns.killall(host);
     ns.scp(script, host);
 
-    const capacity = Math.floor(ns.getServerMaxRam(host) / ns.getScriptRam(script, host));
+    const capacity = Math.floor(
+      ns.getServerMaxRam(host) / ns.getScriptRam(script, host),
+    );
     if (capacity === 0) {
       return;
     }

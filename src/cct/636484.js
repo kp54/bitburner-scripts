@@ -12,7 +12,10 @@ Determine the maximum possible profit you can earn using at most two transaction
 If no profit can be made, then the answer should be 0
 */
 
-const PRICES = [110, 99, 13, 193, 52, 163, 163, 84, 81, 181, 136, 26, 84, 156, 195, 98, 118, 16, 131, 165, 111, 2, 71];
+const PRICES = [
+  110, 99, 13, 193, 52, 163, 163, 84, 81, 181, 136, 26, 84, 156, 195, 98, 118,
+  16, 131, 165, 111, 2, 71,
+];
 
 /** @param {number[]} prices */
 const find = (prices) => {
@@ -39,7 +42,7 @@ export const main = async (ns) => {
 
   for (let i = 2; i < PRICES.length - 2; i++) {
     const left = PRICES.slice(0, i);
-    const right = PRICES.slice(i, PRICES.length)
+    const right = PRICES.slice(i, PRICES.length);
 
     const score = find(left) + find(right);
     if (current_max < score) {

@@ -3,7 +3,7 @@ import { walk } from "lib/net-walker";
 /** @param {NS} ns */
 export const main = async (ns) => {
   if (ns.args.length !== 1) {
-    ns.tprint('usage: rec-kill FILE');
+    ns.tprint("usage: rec-kill FILE");
     return;
   }
 

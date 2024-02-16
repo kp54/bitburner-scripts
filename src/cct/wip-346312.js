@@ -37,7 +37,7 @@ const sum = (arr, picks) => {
 export const main = async (ns) => {
   let ways = 0;
 
-  for (let i = 0; i < (2 << ARR.length); i++) {
+  for (let i = 0; i < 2 << ARR.length; i++) {
     if (sum(ARR, i) === 110) {
       ways += 1;
     }

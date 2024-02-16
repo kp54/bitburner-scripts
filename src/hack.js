@@ -1,7 +1,7 @@
 /** @param {NS} ns */
 export const main = async (ns) => {
   if (ns.args.length !== 1) {
-    ns.tprint('usage: hack TARGET');
+    ns.tprint("usage: hack TARGET");
     return;
   }
 

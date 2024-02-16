@@ -1,10 +1,10 @@
-import { walk } from "lib/net-walker";
 import { canHack, openNuke } from "lib/hack-kit";
+import { walk } from "lib/net-walker";
 
 /** @param {NS} ns */
 export const main = async (ns) => {
   let current_max = 0;
-  let current_host = '(none)';
+  let current_host = "(none)";
 
   /**
    * @param {NS} ns
@@ -19,7 +19,7 @@ export const main = async (ns) => {
     // As a rule of thumb, your hacking target should be the Server
     // with highest max money that's required hacking level is
     // under 1/2 of your hacking level.
-    if ((ns.getHackingLevel() / 2) < ns.getServerRequiredHackingLevel(host)) {
+    if (ns.getHackingLevel() / 2 < ns.getServerRequiredHackingLevel(host)) {
       return;
     }
 
