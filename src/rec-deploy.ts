@@ -20,7 +20,15 @@ export const main = async (ns: NS) => {
     return;
   }
 
-  const deploy = (ns: NS, host: string) => {
+  await walk(ns, (ns, host) => {
+    if (host === ns.getHostname()) {
+      return;
+    }
+
+    if (!openNuke(ns, host)) {
+      return;
+    }
+
     ns.killall(host);
     ns.scp(script, host);
 
@@ -32,19 +40,5 @@ export const main = async (ns: NS) => {
     }
 
     ns.exec(script, host, { threads: capacity }, ...args);
-  };
-
-  const work = (ns: NS, host: string) => {
-    if (host === ns.getHostname()) {
-      return;
-    }
-
-    if (!openNuke(ns, host)) {
-      return;
-    }
-
-    deploy(ns, host);
-  };
-
-  await walk(ns, work);
+  });
 };
