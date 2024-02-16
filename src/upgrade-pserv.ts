@@ -1,14 +1,14 @@
 import { NS } from "@ns";
+import { startHack } from "./lib/hack-kit";
 
 export const main = async (ns: NS) => {
-  if (ns.args.length !== 2) {
-    ns.tprint("usage: upgrade-pserv SIZE TARGET");
+  if (ns.args.length < 2) {
+    ns.tprint("usage: upgrade-pserv SIZE TARGET...");
     return;
   }
 
-  const script = "hack.js";
   const memSize = Number(ns.args[0]);
-  const target = String(ns.args[1]);
+  const targets = ns.args.slice(1).map((x) => String(x));
 
   const servers = ns.getPurchasedServers();
   for (const server of servers) {
@@ -26,10 +26,6 @@ export const main = async (ns: NS) => {
     ns.upgradePurchasedServer(server, memSize);
 
     ns.killall(server);
-    ns.scp(script, server);
-    const threads = Math.floor(
-      ns.getServerMaxRam(server) / ns.getScriptRam(script, server),
-    );
-    ns.exec(script, server, { threads }, target);
+    startHack(ns, server, targets);
   }
 };

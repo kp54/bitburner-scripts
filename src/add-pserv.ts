@@ -1,13 +1,13 @@
 import { NS } from "@ns";
+import { startHack } from "./lib/hack-kit";
 
 export const main = async (ns: NS) => {
-  if (ns.args.length !== 1) {
-    ns.tprint("usage: add-pserv TARGET");
+  if (ns.args.length < 1) {
+    ns.tprint("usage: add-pserv TARGET...");
     return;
   }
 
-  const script = "hack.js";
-  const target = String(ns.args[0]);
+  const targets = ns.args.map((x) => String(x));
   const memSize = 32;
 
   let numServers = ns.getPurchasedServers().length;
@@ -18,11 +18,7 @@ export const main = async (ns: NS) => {
     ) {
       const host = ns.purchaseServer(`pserv-${numServers}`, memSize);
 
-      ns.scp(script, host);
-      const threads = Math.floor(
-        ns.getServerMaxRam(host) / ns.getScriptRam(script, host),
-      );
-      ns.exec(script, host, { threads }, target);
+      startHack(ns, host, targets);
 
       numServers += 1;
     }

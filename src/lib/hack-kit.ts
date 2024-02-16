@@ -38,3 +38,31 @@ export const openNuke = (ns: NS, host: string) => {
 
   return true;
 };
+
+export const startHack = (
+  ns: NS,
+  host: string,
+  targets: string[],
+  ram: number = ns.getServerMaxRam(host),
+) => {
+  const script = "lib/_hack.js";
+  ns.scp(script, host);
+
+  const capacity = Math.floor(ram / ns.getScriptRam(script, host));
+  const div = Math.floor(capacity / targets.length);
+  let mod = capacity % targets.length;
+
+  for (const target of targets) {
+    let threads = div;
+    if (0 < mod) {
+      threads += 1;
+      mod -= 1;
+    }
+
+    if (threads === 0) {
+      break;
+    }
+
+    ns.exec(script, host, { threads }, target);
+  }
+};
