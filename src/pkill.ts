@@ -6,11 +6,12 @@ export const main = (ns: NS) => {
     return;
   }
 
-  const script = String(ns.args[0]);
+  const match = String(ns.args[0]);
 
   const procs = ns.ps();
   for (const proc of procs) {
-    if (proc.filename === script) {
+    const cmdline = `${proc.filename} ${proc.args.join(" ")}`;
+    if (cmdline.includes(match)) {
       ns.kill(proc.pid);
     }
   }
