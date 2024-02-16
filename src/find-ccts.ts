@@ -3,7 +3,7 @@ import { walk } from "lib/net-walker";
 
 const logs = [""];
 
-const work = async (ns: NS, host: string, path: string[]) => {
+const work = (ns: NS, host: string, path: string[]) => {
   if (host === ns.getHostname()) {
     return;
   }

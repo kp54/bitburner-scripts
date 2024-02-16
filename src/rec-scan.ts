@@ -3,7 +3,7 @@ import { walk } from "lib/net-walker";
 
 const results = new Set<string>();
 
-const work = async (ns: NS, host: string, path: string[]) => {
+const work = (ns: NS, host: string, path: string[]) => {
   if (!host.startsWith("pserv-") && 0 < path.length) {
     const prev = path.slice(-1)[0];
     results.add(`"${prev}" -> "${host}";`);

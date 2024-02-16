@@ -1,6 +1,6 @@
 import { NS } from "@ns";
 
-export const main = async (ns: NS) => {
+export const main = (ns: NS) => {
   if (ns.args.length !== 2) {
     ns.tprint("usage: calc-upgrade SERVER SIZE");
     return;

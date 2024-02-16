@@ -1,7 +1,7 @@
 import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
-const scrape = async (ns: NS, host: string) => {
+const scrape = (ns: NS, host: string) => {
   if (host === ns.getHostname()) {
     return;
   }

@@ -34,7 +34,7 @@ export const main = async (ns: NS) => {
     ns.exec(script, host, { threads: capacity }, ...args);
   };
 
-  const work = async (ns: NS, host: string) => {
+  const work = (ns: NS, host: string) => {
     if (host === ns.getHostname()) {
       return;
     }

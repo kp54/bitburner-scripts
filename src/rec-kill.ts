@@ -9,7 +9,7 @@ export const main = async (ns: NS) => {
 
   const script = String(ns.args[0]);
 
-  const kill = async (ns: NS, host: string) => {
+  const kill = (ns: NS, host: string) => {
     const procs = ns.ps(host);
     for (const proc of procs) {
       if (proc.filename === script) {

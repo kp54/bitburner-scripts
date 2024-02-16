@@ -1,6 +1,6 @@
 import { NS } from "@ns";
 
-export const main = async (ns: NS) => {
+export const main = (ns: NS) => {
   if (ns.args.length < 1) {
     ns.tprint("usage: fill FILE [ARGS...]");
     return;

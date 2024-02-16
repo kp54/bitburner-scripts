@@ -3,7 +3,7 @@ import { walk } from "lib/net-walker";
 
 const logs = new Array("<deep-ls>");
 
-const list = async (ns: NS, host: string, path: string[]) => {
+const list = (ns: NS, host: string, path: string[]) => {
   if (host === ns.getHostname()) {
     return;
   }

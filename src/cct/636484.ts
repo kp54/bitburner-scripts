@@ -37,7 +37,7 @@ const find = (prices: number[]) => {
   return current_max;
 };
 
-export const main = async (ns: NS) => {
+export const main = (ns: NS) => {
   let current_max = find(PRICES);
 
   for (let i = 2; i < PRICES.length - 2; i++) {

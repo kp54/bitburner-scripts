@@ -31,7 +31,7 @@ const sum = (arr: number[], picks: number) => {
   return result;
 };
 
-export const main = async (ns: NS) => {
+export const main = (ns: NS) => {
   let ways = 0;
 
   for (let i = 0; i < 2 << ARR.length; i++) {

@@ -6,7 +6,7 @@ export const main = async (ns: NS) => {
   let current_max = 0;
   let current_host = "(none)";
 
-  const work = async (ns: NS, host: string) => {
+  const work = (ns: NS, host: string) => {
     if (!canHack(ns, host) || !openNuke(ns, host)) {
       return;
     }
