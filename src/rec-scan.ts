@@ -1,6 +1,21 @@
 import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
+const config = `
+graph [
+  bgcolor = "#222222"
+]
+
+edge [
+  color = "#aaaaaa"
+]
+
+node [
+  color = white
+  fontcolor = white
+]
+`;
+
 export const main = async (ns: NS) => {
   const results = new Set<string>();
 
@@ -11,5 +26,7 @@ export const main = async (ns: NS) => {
     }
   });
 
-  ns.tprint(`\ndigraph G {\n${Array.from(results).join("\n")}\n}\n`);
+  const lines = ["", "digraph G {", config, ...Array.from(results), "}"];
+
+  ns.tprint(lines.join("\n"));
 };
