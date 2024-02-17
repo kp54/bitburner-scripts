@@ -2,7 +2,7 @@ import { NS } from "@ns";
 import { walk } from "lib/net-walker";
 
 export const main = async (ns: NS) => {
-  await walk(ns, (ns, host) => {
+  await walk(ns, (host) => {
     if (host === ns.getHostname()) {
       return;
     }

@@ -20,7 +20,7 @@ export const main = async (ns: NS) => {
     return;
   }
 
-  await walk(ns, (ns, host) => {
+  await walk(ns, (host) => {
     if (host === ns.getHostname()) {
       return;
     }

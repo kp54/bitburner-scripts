@@ -19,7 +19,7 @@ node [
 export const main = async (ns: NS) => {
   const results = new Set<string>();
 
-  await walk(ns, (ns, host, path) => {
+  await walk(ns, (host, path) => {
     if (!host.startsWith("pserv-") && 0 < path.length) {
       const prev = path.slice(-1)[0];
       results.add(`"${prev}" -> "${host}";`);

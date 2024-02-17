@@ -13,7 +13,7 @@ export const main = async (ns: NS) => {
   const knownHosts = new Set<string>([ns.getHostname()]);
 
   while (true) {
-    await walk(ns, (_, host) => {
+    await walk(ns, (host) => {
       if (knownHosts.has(host) || !openNuke(ns, host)) {
         return;
       }

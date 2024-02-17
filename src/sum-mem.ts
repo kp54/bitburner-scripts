@@ -8,7 +8,7 @@ export const main = async (ns: NS) => {
   let all = 0;
   let avail = 0;
 
-  const work = (ns: NS, host: string) => {
+  await walk(ns, (host) => {
     if (host === home) {
       return;
     }
@@ -19,9 +19,7 @@ export const main = async (ns: NS) => {
     if (ns.getServerNumPortsRequired(host) <= thres) {
       avail += mem;
     }
-  };
-
-  await walk(ns, work);
+  });
 
   ns.tprint(`all: ${all}, avail: ${avail}`);
 };

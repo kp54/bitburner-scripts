@@ -4,7 +4,7 @@ import { walk } from "lib/net-walker";
 export const main = async (ns: NS) => {
   const logs = new Array("<deep-ls>");
 
-  await walk(ns, (ns, host, path) => {
+  await walk(ns, (host, path) => {
     if (host === ns.getHostname()) {
       return;
     }

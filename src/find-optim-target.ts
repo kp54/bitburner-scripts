@@ -10,7 +10,7 @@ export const main = async (ns: NS) => {
 
   const hosts = new Array<{ host: string; score: number }>();
 
-  await walk(ns, (ns, host) => {
+  await walk(ns, (host) => {
     if (!canHack(ns, host) || !openNuke(ns, host)) {
       return;
     }
