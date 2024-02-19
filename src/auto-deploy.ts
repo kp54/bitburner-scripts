@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { openNuke, startHack } from "lib/hack-kit";
+import { openNuke, showMissing, startHack } from "lib/hack-kit";
 import { walk } from "lib/net-walker";
 
 export const main = async (ns: NS) => {
@@ -9,6 +9,10 @@ export const main = async (ns: NS) => {
   }
 
   const targets = ns.args.map((x) => String(x));
+
+  if (showMissing(ns, targets)) {
+    return;
+  }
 
   const knownHosts = new Set<string>([ns.getHostname()]);
 

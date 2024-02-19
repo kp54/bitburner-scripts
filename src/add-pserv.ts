@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { startHack } from "./lib/hack-kit";
+import { showMissing, startHack } from "./lib/hack-kit";
 
 export const main = async (ns: NS) => {
   if (ns.args.length < 1) {
@@ -7,8 +7,12 @@ export const main = async (ns: NS) => {
     return;
   }
 
-  const targets = ns.args.map((x) => String(x));
   const memSize = 32;
+  const targets = ns.args.map((x) => String(x));
+
+  if (showMissing(ns, targets)) {
+    return;
+  }
 
   let numServers = ns.getPurchasedServers().length;
 

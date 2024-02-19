@@ -66,3 +66,15 @@ export const startHack = (
     ns.exec(script, host, { threads }, target);
   }
 };
+
+export const showMissing = (ns: NS, targets: string[]) => {
+  const missing = targets.filter((x) => !ns.serverExists(x));
+  if (0 < missing.length) {
+    for (const target of missing) {
+      ns.tprint(`${target}: no such host.`);
+    }
+    return true;
+  }
+
+  return false;
+};
