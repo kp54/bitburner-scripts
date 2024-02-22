@@ -2,12 +2,7 @@ import { NS } from "@ns";
 import { canHack, openNuke } from "lib/hack-kit";
 import { walk } from "lib/net-walker";
 
-export const main = async (ns: NS) => {
-  let limit = 5;
-  if (ns.args.length === 1) {
-    limit = Number(ns.args[0]);
-  }
-
+export const findOptimTargets = async (ns: NS, limit: number) => {
   const hosts = new Array<{ host: string; score: number }>();
 
   await walk(ns, (host) => {
@@ -29,8 +24,19 @@ export const main = async (ns: NS) => {
 
   hosts.sort((x, y) => y.score - x.score);
   if (limit !== -1) {
-    hosts.splice(5);
+    hosts.splice(limit);
   }
+
+  return hosts;
+};
+
+export const main = async (ns: NS) => {
+  let limit = 5;
+  if (ns.args.length === 1) {
+    limit = Number(ns.args[0]);
+  }
+
+  const hosts = await findOptimTargets(ns, limit);
 
   const lines = hosts
     .map((x) => `${x.host}: ${ns.formatNumber(x.score)}`)
