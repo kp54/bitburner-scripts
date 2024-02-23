@@ -2,6 +2,7 @@ import { algorithmicStockTraderIII } from "cct/algorithmic-stock-trader-iii";
 import { arrayJumpingGame } from "cct/array-jumping-game";
 import { compressionI_RleCompression } from "cct/compression-i-rle-compression";
 import { findLargestPrimeFactor } from "cct/find-largest-prime-factor";
+import { generateIpAddresses } from "cct/generate-ip-addresses";
 import { proper2ColoringOfAGraph } from "cct/proper-2-coloring-of-a-graph";
 import { shortestPathInAGrid } from "cct/shortest-path-in-a-grid";
 import { totalWaysToSum } from "cct/total-ways-to-sum";
@@ -14,6 +15,7 @@ export const solvers = new Map<string, Solver>([
   ["Array Jumping Game", arrayJumpingGame],
   ["Compression I: RLE Compression", compressionI_RleCompression],
   ["Find Largest Prime Factor", findLargestPrimeFactor],
+  ["Generate IP Addresses", generateIpAddresses],
   ["Proper 2-Coloring of a Graph", proper2ColoringOfAGraph],
   ["Shortest Path in a Grid", shortestPathInAGrid],
   ["Total Ways to Sum", totalWaysToSum],
