@@ -3,6 +3,13 @@ import { solvers } from "./cct/index";
 
 export const main = async (ns: NS) => {
   const host = ns.getHostname();
+
+  for (const file of ns.ls(host)) {
+    if (file.endsWith(".cct")) {
+      ns.rm(file);
+    }
+  }
+
   const types = ns.codingcontract.getContractTypes();
   for (const type of types) {
     const solver = solvers.get(type);
@@ -12,9 +19,8 @@ export const main = async (ns: NS) => {
 
     ns.tprint(`testing implementation for '${type}'...`);
 
-    let failed = false;
     const startAt = Date.now();
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 128; i++) {
       ns.codingcontract.createDummyContract(type);
       const file = ns
         .ls(host)
@@ -28,19 +34,15 @@ export const main = async (ns: NS) => {
       const output = solver(input);
       const result = ns.codingcontract.attempt(output, file, host);
       if (result === "") {
-        failed = true;
-        break;
+        ns.tprint("- failed.");
+        return;
       }
 
       ns.rm(file, host);
       await ns.asleep(10);
     }
 
-    if (failed) {
-      ns.tprint("- failed.");
-    } else {
-      const elapsed = Date.now() - startAt;
-      ns.tprint(`- succeeded in ${elapsed} ms.`);
-    }
+    const elapsed = Date.now() - startAt;
+    ns.tprint(`- succeeded in ${elapsed} ms.`);
   }
 };

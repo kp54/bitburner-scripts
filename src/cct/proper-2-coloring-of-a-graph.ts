@@ -32,9 +32,9 @@ import { NS } from "@ns";
 export const proper2ColoringOfAGraph = (
   input: [number, [number, number][]],
 ) => {
-  const [nodes, edges] = input;
+  const [size, edges] = input;
 
-  const adjs = new Array(nodes).fill(0).map(() => new Set<number>());
+  const adjs = new Array(size).fill(0).map(() => new Set<number>());
   for (const [x, y] of edges) {
     adjs[x].add(y);
     adjs[y].add(x);
@@ -43,24 +43,40 @@ export const proper2ColoringOfAGraph = (
   const sideA = new Set<number>();
   const sideB = new Set<number>();
 
-  for (let x = 0; x < nodes; x++) {
-    let sideX = sideA;
-    let sideY = sideB;
-    if (sideY.has(x)) {
-      [sideX, sideY] = [sideY, sideX];
-    }
+  const visited = new Set<number>();
 
-    sideX.add(x);
-    for (const y of adjs[x]) {
-      if (sideX.has(y)) {
-        return [];
+  for (let i = 0; i < size; i++) {
+    const queue = [i];
+
+    while (true) {
+      const node = queue.shift();
+      if (node === undefined) {
+        break;
       }
-      sideY.add(y);
+      if (visited.has(node)) {
+        continue;
+      }
+      visited.add(node);
+
+      let sideX = sideA;
+      let sideY = sideB;
+
+      if (sideY.has(node)) {
+        [sideX, sideY] = [sideY, sideX];
+      }
+
+      for (const adj of adjs[node]) {
+        if (sideX.has(adj)) {
+          return [];
+        }
+        sideY.add(adj);
+        queue.push(adj);
+      }
     }
   }
 
   const result = new Array<number>();
-  for (let i = 0; i < nodes; i++) {
+  for (let i = 0; i < size; i++) {
     if (sideA.has(i)) {
       result.push(0);
     } else {
