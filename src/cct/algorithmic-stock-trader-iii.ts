@@ -35,7 +35,7 @@ const find = (prices: number[]) => {
 export const algorithmicStockTraderIII = (prices: number[]) => {
   let current_max = find(prices);
 
-  for (let i = 2; i < prices.length - 2; i++) {
+  for (let i = 2; i < prices.length - 1; i++) {
     const left = prices.slice(0, i);
     const right = prices.slice(i, prices.length);
 
