@@ -32,7 +32,7 @@ export const arrayJumpingGame = (arr: number[]) => {
     }
   }
 
-  return reachable[arr.length - 1];
+  return reachable[arr.length - 1] ? 1 : 0;
 };
 
 export const main = (ns: NS) => {

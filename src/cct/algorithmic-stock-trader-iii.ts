@@ -44,6 +44,8 @@ export const algorithmicStockTraderIII = (prices: number[]) => {
       current_max = score;
     }
   }
+
+  return current_max;
 };
 
 export const main = (ns: NS) => {

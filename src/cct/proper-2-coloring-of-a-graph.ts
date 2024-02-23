@@ -22,6 +22,9 @@ Output: [0, 0, 1, 1]
 
 Input: [3, [[0, 1], [0, 2], [1, 2]]]
 Output: []
+
+Input: [9, [[2, 5], [1, 8], [3, 6], [0, 4], [4, 8], [2, 7], [4, 6], [1, 7], [1, 5], [1, 6], [0, 1]]]
+Output: [0, 1, 1, 1, 1, 0, 0, 0, 0]
 */
 
 import { NS } from "@ns";
@@ -31,10 +34,10 @@ export const proper2ColoringOfAGraph = (
 ) => {
   const [nodes, edges] = input;
 
-  const adjs = new Array(nodes).fill(0).map(() => new Array<number>());
+  const adjs = new Array(nodes).fill(0).map(() => new Set<number>());
   for (const [x, y] of edges) {
-    adjs[x].push(y);
-    adjs[y].push(x);
+    adjs[x].add(y);
+    adjs[y].add(x);
   }
 
   const sideA = new Set<number>();
@@ -47,6 +50,7 @@ export const proper2ColoringOfAGraph = (
       [sideX, sideY] = [sideY, sideX];
     }
 
+    sideX.add(x);
     for (const y of adjs[x]) {
       if (sideX.has(y)) {
         return [];
@@ -70,28 +74,19 @@ export const proper2ColoringOfAGraph = (
 export const main = (ns: NS) => {
   ns.tprint(
     proper2ColoringOfAGraph([
-      12,
+      9,
       [
-        [9, 11],
-        [2, 10],
-        [7, 8],
-        [0, 7],
-        [7, 9],
-        [5, 9],
-        [1, 10],
-        [8, 11],
-        [2, 6],
-        [8, 10],
-        [4, 8],
         [2, 5],
-        [0, 5],
-        [1, 11],
-        [3, 7],
-        [1, 4],
-        [0, 10],
-        [9, 10],
-        [3, 7],
-        [4, 9],
+        [1, 8],
+        [3, 6],
+        [0, 4],
+        [4, 8],
+        [2, 7],
+        [4, 6],
+        [1, 7],
+        [1, 5],
+        [1, 6],
+        [0, 1],
       ],
     ]),
   );
