@@ -15,9 +15,10 @@ export const main = (ns: NS) => {
 
   const host = ns.getHostname();
 
-  const reserve = 12;
+  const max = ns.getServerMaxRam(host);
+  const reserve = Math.min(24, Math.floor(max * 0.25));
   const used = ns.getServerUsedRam(host);
-  const available = ns.getServerMaxRam(host) - used - reserve;
+  const available = max - used - reserve;
 
   startHack(ns, host, targets, available);
 };
