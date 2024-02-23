@@ -1,5 +1,6 @@
 import { NS } from "@ns";
 import { walk } from "lib/net-walker";
+import { solvers } from "./cct/index";
 import { tabulate } from "./lib/pretty";
 
 export const main = async (ns: NS) => {
@@ -14,9 +15,10 @@ export const main = async (ns: NS) => {
 
     for (const file of files) {
       const type = ns.codingcontract.getContractType(file, host);
-      ccts.push([host, file, type]);
+      const solver = String(solvers.get(type) !== undefined);
+      ccts.push([host, file, type, solver]);
     }
   });
 
-  ns.tprint(`\n${tabulate(ccts, ["host", "file", "type"])}`);
+  ns.tprint(`\n${tabulate(ccts, ["host", "file", "type", "solver"])}`);
 };

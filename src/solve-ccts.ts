@@ -15,7 +15,7 @@ export const main = async (ns: NS) => {
 
       if (solver === undefined) {
         log.push([host, file, type, "not implemented", ""]);
-        return;
+        continue;
       }
 
       const input = ns.codingcontract.getData(file, host);
