@@ -1,19 +1,20 @@
 import { NS } from "@ns";
 import { solvers } from "./cct/index";
 import { walk } from "./lib/net-walker";
+import { tabulate } from "./lib/pretty";
 
 export const main = async (ns: NS) => {
+  const log = new Array<Array<string>>();
+
   await walk(ns, (host) => {
     const ccts = ns.ls(host).filter((x) => x.endsWith(".cct"));
 
     for (const file of ccts) {
-      const log = (line: string) => ns.tprint(`${host}: ${file}: ${line}`);
-
       const type = ns.codingcontract.getContractType(file, host);
       const solver = solvers.get(type);
 
       if (solver === undefined) {
-        log(`solver not implemented for '${type}'`);
+        log.push([host, file, type, "not implemented", ""]);
         return;
       }
 
@@ -22,10 +23,12 @@ export const main = async (ns: NS) => {
 
       const result = ns.codingcontract.attempt(output, file, host);
       if (result === "") {
-        log("failed");
+        log.push([host, file, type, "failed", ""]);
       } else {
-        log(`succeeded: ${result}`);
+        log.push([host, file, type, "succeeded", result]);
       }
     }
   });
+
+  ns.tprint(`\n${tabulate(log, ["host", "file", "type", "result", "reward"])}`);
 };

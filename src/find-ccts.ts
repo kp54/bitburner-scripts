@@ -1,22 +1,22 @@
 import { NS } from "@ns";
 import { walk } from "lib/net-walker";
+import { tabulate } from "./lib/pretty";
 
 export const main = async (ns: NS) => {
-  const logs = [""];
+  const ccts = new Array<Array<string>>();
 
   await walk(ns, (host) => {
     if (host === ns.getHostname()) {
       return;
     }
 
-    const ccts = ns.ls(host).filter((x) => x.endsWith(".cct"));
+    const files = ns.ls(host).filter((x) => x.endsWith(".cct"));
 
-    for (const cct of ccts) {
-      const type = ns.codingcontract.getContractType(cct, host);
-      const line = `${host}: ${cct} ${type}`;
-      logs.push(line);
+    for (const file of files) {
+      const type = ns.codingcontract.getContractType(file, host);
+      ccts.push([host, file, type]);
     }
   });
 
-  ns.tprint(logs.join("\n"));
+  ns.tprint(`\n${tabulate(ccts, ["host", "file", "type"])}`);
 };
