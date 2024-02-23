@@ -23,7 +23,7 @@ export const arrayJumpingGame = (arr: number[]) => {
       continue;
     }
 
-    for (let j = 0; j < arr[i]; j++) {
+    for (let j = 0; j <= arr[i]; j++) {
       if (arr.length <= j) {
         break;
       }
