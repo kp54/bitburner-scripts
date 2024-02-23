@@ -15,7 +15,7 @@ Your answer should be submitted as 1 or 0, representing true and false respectiv
 
 import { NS } from "@ns";
 
-const solve = (arr: number[]) => {
+export const arrayJumpingGame = (arr: number[]) => {
   const reachable = new Array(arr.length).fill(false);
   reachable[0] = true;
   for (let i = 0; i < arr.length; i++) {
@@ -37,5 +37,5 @@ const solve = (arr: number[]) => {
 
 export const main = (ns: NS) => {
   const arr = [7, 0, 1, 9, 0, 10, 1, 0, 10, 2, 7, 5, 0];
-  ns.tprint(solve(arr));
+  ns.tprint(arrayJumpingGame(arr));
 };

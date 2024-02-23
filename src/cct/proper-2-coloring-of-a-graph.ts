@@ -26,7 +26,11 @@ Output: []
 
 import { NS } from "@ns";
 
-const solve = (nodes: number, edges: [number, number][]) => {
+export const proper2ColoringOfAGraph = (
+  input: [number, [number, number][]],
+) => {
+  const [nodes, edges] = input;
+
   const adjs = new Array(nodes).fill(0).map(() => new Array<number>());
   for (const [x, y] of edges) {
     adjs[x].push(y);
@@ -65,27 +69,30 @@ const solve = (nodes: number, edges: [number, number][]) => {
 
 export const main = (ns: NS) => {
   ns.tprint(
-    solve(12, [
-      [9, 11],
-      [2, 10],
-      [7, 8],
-      [0, 7],
-      [7, 9],
-      [5, 9],
-      [1, 10],
-      [8, 11],
-      [2, 6],
-      [8, 10],
-      [4, 8],
-      [2, 5],
-      [0, 5],
-      [1, 11],
-      [3, 7],
-      [1, 4],
-      [0, 10],
-      [9, 10],
-      [3, 7],
-      [4, 9],
+    proper2ColoringOfAGraph([
+      12,
+      [
+        [9, 11],
+        [2, 10],
+        [7, 8],
+        [0, 7],
+        [7, 9],
+        [5, 9],
+        [1, 10],
+        [8, 11],
+        [2, 6],
+        [8, 10],
+        [4, 8],
+        [2, 5],
+        [0, 5],
+        [1, 11],
+        [3, 7],
+        [1, 4],
+        [0, 10],
+        [9, 10],
+        [3, 7],
+        [4, 9],
+      ],
     ]),
   );
 };

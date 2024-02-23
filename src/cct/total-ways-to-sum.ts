@@ -34,11 +34,11 @@ const rec = (num: number, choices: number[]) => {
   return sum;
 };
 
-const solve = (num: number) => {
+export const totalWaysToSum = (num: number) => {
   const choices = new Array(num - 1).fill(0).map((_, i) => i + 1);
   return rec(num, choices);
 };
 
 export const main = (ns: NS) => {
-  ns.tprint(solve(51));
+  ns.tprint(totalWaysToSum(51));
 };

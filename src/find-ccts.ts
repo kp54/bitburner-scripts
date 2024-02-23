@@ -4,16 +4,16 @@ import { walk } from "lib/net-walker";
 export const main = async (ns: NS) => {
   const logs = [""];
 
-  await walk(ns, (host, path) => {
+  await walk(ns, (host) => {
     if (host === ns.getHostname()) {
       return;
     }
 
-    const cwd = [...path, host].join("/");
     const ccts = ns.ls(host).filter((x) => x.endsWith(".cct"));
 
     for (const cct of ccts) {
-      const line = `${cwd}: ${cct}`;
+      const type = ns.codingcontract.getContractType(cct, host);
+      const line = `${host}: ${cct} ${type}`;
       logs.push(line);
     }
   });

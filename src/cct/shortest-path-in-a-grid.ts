@@ -38,7 +38,7 @@ Answer: ''
 
 import { NS } from "@ns";
 
-const solve = (map: number[][]) => {
+export const shortestPathInAGrid = (map: number[][]) => {
   const goal = {
     y: map.length,
     x: map[0].length,
@@ -105,7 +105,7 @@ const solve = (map: number[][]) => {
 
 export const main = (ns: NS) => {
   ns.tprint(
-    solve([
+    shortestPathInAGrid([
       [0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
       [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
