@@ -22,6 +22,8 @@ Input: digits = "105", target = 5
 Output: [1*0+5, 10-5]
 */
 
+import { NS } from "@ns";
+
 const isValid = (segment: string) => {
   if (segment !== "0" && segment.startsWith("0")) {
     return false;
@@ -54,19 +56,13 @@ const split = (line: string) => {
   return result.filter((x) => x.every((y) => isValid(y)));
 };
 
-const build = (segments: string[], memo: Map<string, string[]>) => {
+const build = (segments: string[]) => {
   if (segments.length < 2) {
     return segments;
   }
 
-  const id = segments.join("_");
-  const cache = memo.get(id);
-  if (cache !== undefined) {
-    return cache;
-  }
-
   const [head, ...rest] = segments;
-  const tails = build(rest, memo);
+  const tails = build(rest);
 
   const result = new Array<string>();
   for (const op of ["+", "-", "*"]) {
@@ -75,7 +71,6 @@ const build = (segments: string[], memo: Map<string, string[]>) => {
     }
   }
 
-  memo.set(id, result);
   return result;
 };
 
@@ -129,10 +124,9 @@ export const findAllValidMathExpressions = (input: [string, number]) => {
   const [line, sum] = input;
 
   const results = new Array<string>();
-  const memo = new Map<string, string[]>();
 
   for (const segments of split(line)) {
-    for (const line of build(segments, memo)) {
+    for (const line of build(segments)) {
       const expr = line.split(",");
       if (calc(expr) === sum) {
         results.push(expr.join(""));
@@ -141,4 +135,8 @@ export const findAllValidMathExpressions = (input: [string, number]) => {
   }
 
   return results;
+};
+
+export const main = (ns: NS) => {
+  ns.tprint(findAllValidMathExpressions(["445400490", 84]));
 };
