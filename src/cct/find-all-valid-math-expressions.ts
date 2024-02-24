@@ -22,8 +22,6 @@ Input: digits = "105", target = 5
 Output: [1*0+5, 10-5]
 */
 
-import { NS } from "@ns";
-
 const isValid = (segment: string) => {
   if (segment !== "0" && segment.startsWith("0")) {
     return false;
@@ -52,12 +50,13 @@ const split = (line: string) => {
     segments.push(line.slice(cur, line.length));
     result.push(segments);
   }
+
   return result.filter((x) => x.every((y) => isValid(y)));
 };
 
 const build = (segments: string[], memo: Map<string, string[]>) => {
   if (segments.length < 2) {
-    return [segments.join("")];
+    return segments;
   }
 
   const id = segments.join("_");
@@ -72,12 +71,58 @@ const build = (segments: string[], memo: Map<string, string[]>) => {
   const result = new Array<string>();
   for (const op of ["+", "-", "*"]) {
     for (const tail of tails) {
-      result.push(head + op + tail);
+      result.push(`${head},${op},${tail}`);
     }
   }
 
   memo.set(id, result);
   return result;
+};
+
+const calc = (expr: string[]) => {
+  // biome-ignore lint/suspicious/noExplicitAny:
+  const tokens: any[] = [...expr];
+  for (let i = 0; i < tokens.length; i += 2) {
+    tokens[i] = Number(tokens[i]);
+  }
+
+  let i = 1;
+  while (i < tokens.length - 1) {
+    if (tokens[i] !== "*") {
+      i += 2;
+      continue;
+    }
+
+    const head = i - 1;
+
+    let mul = tokens[head];
+    while (tokens[i] === "*" && i < tokens.length - 1) {
+      mul *= tokens[i + 1];
+      tokens[i] = "+";
+      tokens[i + 1] = 0;
+      i += 2;
+    }
+
+    tokens[head] = mul;
+  }
+
+  let sum: number = tokens[0];
+  for (let i = 1; i < tokens.length - 1; i += 2) {
+    switch (tokens[i]) {
+      case "+":
+        sum += tokens[i + 1];
+        break;
+
+      case "-":
+        sum -= tokens[i + 1];
+        break;
+
+      default:
+        throw new Error();
+    }
+  }
+
+  return sum;
 };
 
 export const findAllValidMathExpressions = (input: [string, number]) => {
@@ -86,17 +131,14 @@ export const findAllValidMathExpressions = (input: [string, number]) => {
   const results = new Array<string>();
   const memo = new Map<string, string[]>();
 
-  for (const pattern of split(line)) {
-    for (const expr of build(pattern, memo)) {
-      if (eval(expr) === sum) {
-        results.push(expr);
+  for (const segments of split(line)) {
+    for (const line of build(segments, memo)) {
+      const expr = line.split(",");
+      if (calc(expr) === sum) {
+        results.push(expr.join(""));
       }
     }
   }
 
   return results;
-};
-
-export const main = (ns: NS) => {
-  ns.tprint(findAllValidMathExpressions(["445400490", 84]));
 };
