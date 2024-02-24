@@ -8,6 +8,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "inlineSourceMap": true,
     "inlineSources": true,
     "strict": true,
