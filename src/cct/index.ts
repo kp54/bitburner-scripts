@@ -1,5 +1,5 @@
 import { algorithmicStockTraderIII } from "cct/algorithmic-stock-trader-iii";
-import { algorithmicStockTraderIv } from "cct/algorithmic-stock-trader-iv";
+import { algorithmicStockTraderIV } from "cct/algorithmic-stock-trader-iv";
 import { arrayJumpingGame } from "cct/array-jumping-game";
 import { compressionI_RleCompression } from "cct/compression-i-rle-compression";
 import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions";
@@ -14,7 +14,7 @@ type Solver = (input: any) => any;
 
 export const solvers = new Map<string, Solver>([
   ["Algorithmic Stock Trader III", algorithmicStockTraderIII],
-  ["Algorithmic Stock Trader IV", algorithmicStockTraderIv],
+  ["Algorithmic Stock Trader IV", algorithmicStockTraderIV],
   ["Array Jumping Game", arrayJumpingGame],
   ["Compression I: RLE Compression", compressionI_RleCompression],
   ["Find All Valid Math Expressions", findAllValidMathExpressions],

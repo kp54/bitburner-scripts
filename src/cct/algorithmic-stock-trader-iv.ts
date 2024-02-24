@@ -16,30 +16,23 @@ If no profit can be made, then the answer should be 0.
 
 import { NS } from "@ns";
 
-const split = (values: number[], sep: number) => {
-  if (sep === 0) {
-    return [[values]];
+const find = (
+  prices: number[],
+  start: number,
+  stop: number,
+  memo: Map<number, number>,
+) => {
+  const id = start * 1000 + stop;
+  const cache = memo.get(id);
+  if (cache !== undefined) {
+    return cache;
   }
 
-  const results = new Array<Array<Array<number>>>();
-  for (let i = 2; i <= values.length - 2 * sep; i++) {
-    const head = values.slice(0, i);
-    const rest = values.slice(i, values.length);
-    const tails = split(rest, sep - 1);
-    for (const tail of tails) {
-      results.push([head, ...tail]);
-    }
-  }
-
-  return results;
-};
-
-const find = (prices: number[]) => {
   let current_max = 0;
 
-  for (let buyAt = 0; buyAt < prices.length - 1; buyAt++) {
+  for (let buyAt = start; buyAt < stop - 1; buyAt++) {
     const buy = prices[buyAt];
-    for (let sellAt = buyAt + 1; sellAt < prices.length; sellAt++) {
+    for (let sellAt = buyAt + 1; sellAt < stop; sellAt++) {
       const sell = prices[sellAt];
       const score = sell - buy;
 
@@ -49,19 +42,42 @@ const find = (prices: number[]) => {
     }
   }
 
+  memo.set(id, current_max);
   return current_max;
 };
 
-export const algorithmicStockTraderIv = (input: [number, number[]]) => {
+const solve = (
+  prices: number[],
+  start: number,
+  stop: number,
+  sep: number,
+  findMemo: Map<number, number>,
+) => {
+  if (sep === 0) {
+    return find(prices, start, stop, findMemo);
+  }
+
+  let max = 0;
+  for (let i = start + 2; i <= stop - 2 * sep; i++) {
+    const score =
+      find(prices, start, i, findMemo) +
+      solve(prices, i, stop, sep - 1, findMemo);
+    if (max < score) {
+      max = score;
+    }
+  }
+
+  return max;
+};
+
+export const algorithmicStockTraderIV = (input: [number, number[]]) => {
   const [trans, prices] = input;
+  const findMemo = new Map<number, number>();
   let max = 0;
   for (let i = 0; i < trans; i++) {
-    const patterns = split(prices, i);
-    for (const segments of patterns) {
-      const score = segments.reduce((acc, x) => acc + find(x), 0);
-      if (max < score) {
-        max = score;
-      }
+    const score = solve(prices, 0, prices.length, i, findMemo);
+    if (max < score) {
+      max = score;
     }
   }
   return max;
@@ -69,7 +85,7 @@ export const algorithmicStockTraderIv = (input: [number, number[]]) => {
 
 export const main = (ns: NS) => {
   ns.tprint(
-    algorithmicStockTraderIv([
+    algorithmicStockTraderIV([
       6,
       [
         101, 128, 163, 186, 13, 11, 143, 67, 133, 168, 39, 175, 37, 176, 74,
