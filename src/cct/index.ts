@@ -1,6 +1,7 @@
 import { algorithmicStockTraderIII } from "cct/algorithmic-stock-trader-iii";
 import { algorithmicStockTraderIV } from "cct/algorithmic-stock-trader-iv";
 import { arrayJumpingGame } from "cct/array-jumping-game";
+import { arrayJumpingGameII } from "cct/array-jumping-game-ii";
 import { compressionI_RleCompression } from "cct/compression-i-rle-compression";
 import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions";
 import { findLargestPrimeFactor } from "cct/find-largest-prime-factor";
@@ -17,6 +18,7 @@ export const solvers = new Map<string, Solver>([
   ["Algorithmic Stock Trader III", algorithmicStockTraderIII],
   ["Algorithmic Stock Trader IV", algorithmicStockTraderIV],
   ["Array Jumping Game", arrayJumpingGame],
+  ["Array Jumping Game II", arrayJumpingGameII],
   ["Compression I: RLE Compression", compressionI_RleCompression],
   ["Find All Valid Math Expressions", findAllValidMathExpressions],
   ["Find Largest Prime Factor", findLargestPrimeFactor],
