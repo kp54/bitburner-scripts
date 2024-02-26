@@ -1,3 +1,4 @@
+import { algorithmicStockTraderI } from "cct/algorithmic-stock-trader-i";
 import { algorithmicStockTraderIII } from "cct/algorithmic-stock-trader-iii";
 import { algorithmicStockTraderIV } from "cct/algorithmic-stock-trader-iv";
 import { arrayJumpingGame } from "cct/array-jumping-game";
@@ -15,6 +16,7 @@ import { totalWaysToSumII } from "cct/total-ways-to-sum-ii";
 type Solver = (input: any) => any;
 
 export const solvers = new Map<string, Solver>([
+  ["Algorithmic Stock Trader I", algorithmicStockTraderI],
   ["Algorithmic Stock Trader III", algorithmicStockTraderIII],
   ["Algorithmic Stock Trader IV", algorithmicStockTraderIV],
   ["Array Jumping Game", arrayJumpingGame],
