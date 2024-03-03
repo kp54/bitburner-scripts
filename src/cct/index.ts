@@ -7,6 +7,7 @@ import { compressionI_RleCompression } from "cct/compression-i-rle-compression";
 import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions";
 import { findLargestPrimeFactor } from "cct/find-largest-prime-factor";
 import { generateIpAddresses } from "cct/generate-ip-addresses";
+import { mergeOverlappingIntervals } from "cct/merge-overlapping-intervals";
 import { proper2ColoringOfAGraph } from "cct/proper-2-coloring-of-a-graph";
 import { shortestPathInAGrid } from "cct/shortest-path-in-a-grid";
 import { totalWaysToSum } from "cct/total-ways-to-sum";
@@ -27,6 +28,7 @@ export const solvers = new Map<string, Solver>([
   ["Find All Valid Math Expressions", findAllValidMathExpressions],
   ["Find Largest Prime Factor", findLargestPrimeFactor],
   ["Generate IP Addresses", generateIpAddresses],
+  ["Merge Overlapping Intervals", mergeOverlappingIntervals],
   ["Proper 2-Coloring of a Graph", proper2ColoringOfAGraph],
   ["Shortest Path in a Grid", shortestPathInAGrid],
   ["Total Ways to Sum", totalWaysToSum],
