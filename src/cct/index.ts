@@ -11,6 +11,7 @@ import { proper2ColoringOfAGraph } from "cct/proper-2-coloring-of-a-graph";
 import { shortestPathInAGrid } from "cct/shortest-path-in-a-grid";
 import { totalWaysToSum } from "cct/total-ways-to-sum";
 import { totalWaysToSumII } from "cct/total-ways-to-sum-ii";
+import { uniquePathsInAGridII } from "cct/unique-paths-in-a-grid-ii";
 
 // biome-ignore lint/suspicious/noExplicitAny:
 type Solver = (input: any) => any;
@@ -29,4 +30,5 @@ export const solvers = new Map<string, Solver>([
   ["Shortest Path in a Grid", shortestPathInAGrid],
   ["Total Ways to Sum", totalWaysToSum],
   ["Total Ways to Sum II", totalWaysToSumII],
+  ["Unique Paths in a Grid II", uniquePathsInAGridII],
 ]);
