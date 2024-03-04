@@ -1,14 +1,9 @@
 import { NS } from "@ns";
-import { findOptimTargets } from "./find-optim-target";
+import { autoDeploy } from "auto-deploy";
+import { fill } from "fill";
+import { findOptimTargets } from "find-optim-target";
 
 export const main = async (ns: NS) => {
-  const targetAmp = 1.5;
-
-  const autoDeployJs = "auto-deploy.js";
-  const fillJs = "fill.js";
-
-  const host = ns.getHostname();
-
   const state = {
     target: {
       name: "n00dles",
@@ -19,15 +14,14 @@ export const main = async (ns: NS) => {
   while (true) {
     const target = (await findOptimTargets(ns, 1)).shift();
 
-    if (target !== undefined && state.target.score * targetAmp < target.score) {
-      ns.killall(host, true);
-      ns.exec(autoDeployJs, host, {}, target.host);
-      ns.exec(fillJs, host, {}, target.host);
+    if (target !== undefined && state.target.score < target.score) {
+      await autoDeploy(ns, target.host);
+      fill(ns, target.host);
 
       state.target.name = target.host;
       state.target.score = target.score;
     }
 
-    await ns.asleep(60000);
+    await ns.asleep(60 * 1000);
   }
 };

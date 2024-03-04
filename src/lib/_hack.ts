@@ -1,4 +1,5 @@
 import { NS } from "@ns";
+import { Port } from "lib/ports";
 
 export const main = async (ns: NS) => {
   if (ns.args.length !== 1) {
@@ -6,11 +7,23 @@ export const main = async (ns: NS) => {
     return;
   }
 
-  const target = String(ns.args[0]);
-  const securityThreshold = ns.getServerMinSecurityLevel(target);
-  const moneyThreshold = ns.getServerMaxMoney(target);
+  let target = String(ns.args[0]);
+  let securityThreshold = ns.getServerMinSecurityLevel(target);
+  let moneyThreshold = ns.getServerMaxMoney(target);
+
+  const port = ns.getPortHandle(Port.Hack);
 
   while (true) {
+    if (!port.empty()) {
+      const nextTarget = String(port.read());
+      await ns.hack(target);
+
+      target = nextTarget;
+      securityThreshold = ns.getServerMinSecurityLevel(target);
+      moneyThreshold = ns.getServerMaxMoney(target);
+      continue;
+    }
+
     if (securityThreshold < ns.getServerSecurityLevel(target)) {
       await ns.weaken(target);
       continue;

@@ -2,15 +2,15 @@ import { NS } from "@ns";
 import { showMissing, startHack } from "./lib/hack-kit";
 
 export const main = async (ns: NS) => {
-  if (ns.args.length < 2) {
-    ns.tprint("usage: upgrade-pserv SIZE TARGET...");
+  if (ns.args.length !== 2) {
+    ns.tprint("usage: upgrade-pserv SIZE TARGET");
     return;
   }
 
   const memSize = Number(ns.args[0]);
-  const targets = ns.args.slice(1).map((x) => String(x));
+  const target = String(ns.args[1]);
 
-  if (showMissing(ns, targets)) {
+  if (showMissing(ns, [target])) {
     return;
   }
 
@@ -31,6 +31,6 @@ export const main = async (ns: NS) => {
     ns.upgradePurchasedServer(server, memSize);
 
     ns.killall(server);
-    startHack(ns, server, targets);
+    startHack(ns, server, target);
   }
 };

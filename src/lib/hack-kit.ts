@@ -1,4 +1,5 @@
 import { NS } from "@ns";
+import { Port } from "lib/ports";
 
 export const canHack = (ns: NS, host: string) =>
   ns.getServerRequiredHackingLevel(host) <= ns.getHackingLevel();
@@ -42,28 +43,25 @@ export const openNuke = (ns: NS, host: string) => {
 export const startHack = (
   ns: NS,
   host: string,
-  targets: string[],
+  target: string,
   ram: number = ns.getServerMaxRam(host),
 ) => {
   const script = "lib/_hack.js";
-  ns.scp(script, host);
+  const sources = ["lib/_hack.js", "lib/ports.js"];
+
+  const current = ns.ps(host).find((x) => x.filename === script);
+  if (current !== undefined) {
+    ns.tryWritePort(Port.Hack, target);
+    return;
+  }
+
+  for (const src of sources) {
+    ns.scp(src, host);
+  }
 
   const capacity = Math.floor(ram / ns.getScriptRam(script, host));
-  const div = Math.floor(capacity / targets.length);
-  let mod = capacity % targets.length;
-
-  for (const target of targets) {
-    let threads = div;
-    if (0 < mod) {
-      threads += 1;
-      mod -= 1;
-    }
-
-    if (threads === 0) {
-      break;
-    }
-
-    ns.exec(script, host, { threads }, target);
+  if (0 < capacity) {
+    ns.exec(script, host, { threads: capacity }, target);
   }
 };
 
