@@ -23,40 +23,40 @@ NOTE: The data returned for this contract is an 2D array of numbers representing
 import { NS } from "@ns";
 
 export const uniquePathsInAGridII = (input: number[][]) => {
-  const map: number[][] = [
-    [0, ...input[0].map((_) => 0)],
-    ...input.map((row) => [0, ...row.map((x) => (x === 1 ? -1 : 0))]),
-  ];
+	const map: number[][] = [
+		[0, ...input[0].map((_) => 0)],
+		...input.map((row) => [0, ...row.map((x) => (x === 1 ? -1 : 0))]),
+	];
 
-  const height = map.length;
-  const width = map[0].length;
+	const height = map.length;
+	const width = map[0].length;
 
-  map[1][0] = 1;
+	map[1][0] = 1;
 
-  for (let i = 1; i < height; i++) {
-    for (let j = 1; j < width; j++) {
-      if (map[i][j] === -1) {
-        map[i][j] = 0;
-        continue;
-      }
+	for (let i = 1; i < height; i++) {
+		for (let j = 1; j < width; j++) {
+			if (map[i][j] === -1) {
+				map[i][j] = 0;
+				continue;
+			}
 
-      map[i][j] = map[i - 1][j] + map[i][j - 1];
-    }
-  }
+			map[i][j] = map[i - 1][j] + map[i][j - 1];
+		}
+	}
 
-  console.log(map);
+	console.log(map);
 
-  return map[height - 1][width - 1];
+	return map[height - 1][width - 1];
 };
 
 export const main = (ns: NS) => {
-  uniquePathsInAGridII([
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-    [1, 0, 0],
-  ]);
+	uniquePathsInAGridII([
+		[0, 0, 0],
+		[0, 0, 0],
+		[0, 0, 0],
+		[0, 0, 0],
+		[0, 0, 0],
+		[0, 0, 0],
+		[1, 0, 0],
+	]);
 };

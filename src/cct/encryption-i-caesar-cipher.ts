@@ -15,21 +15,21 @@ Return the ciphertext as uppercase string. Spaces remains the same.
 */
 
 export const encryptionI_CaesarCipher = (input: [string, number]) => {
-  const [plain, shift] = input;
+	const [plain, shift] = input;
 
-  const offset = "A".charCodeAt(0);
-  const map = new Map<string, string>();
-  for (let i = 0; i < 26; i++) {
-    map.set(
-      String.fromCharCode(i + offset),
-      String.fromCharCode(((i + 26 - shift) % 26) + offset),
-    );
-  }
+	const offset = "A".charCodeAt(0);
+	const map = new Map<string, string>();
+	for (let i = 0; i < 26; i++) {
+		map.set(
+			String.fromCharCode(i + offset),
+			String.fromCharCode(((i + 26 - shift) % 26) + offset),
+		);
+	}
 
-  const crypt = new Array<string>();
-  for (const c of plain) {
-    crypt.push(map.get(c) ?? c);
-  }
+	const crypt = new Array<string>();
+	for (const c of plain) {
+		crypt.push(map.get(c) ?? c);
+	}
 
-  return crypt.join("");
+	return crypt.join("");
 };

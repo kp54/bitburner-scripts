@@ -17,32 +17,32 @@ The intervals must be returned in ASCENDING order. You can assume that in an int
 */
 
 export const mergeOverlappingIntervals = (input: [number, number][]) => {
-  const max = Math.max(...input.map(([start, stop]) => stop));
-  const arr = new Array(max).fill(0);
+	const max = Math.max(...input.map(([start, stop]) => stop));
+	const arr = new Array(max).fill(0);
 
-  for (const [start, stop] of input) {
-    arr[start - 1] += 1;
-    arr[stop - 1] -= 1;
-  }
+	for (const [start, stop] of input) {
+		arr[start - 1] += 1;
+		arr[stop - 1] -= 1;
+	}
 
-  let current = 0;
-  for (let i = 0; i < max; i++) {
-    current += arr[i];
-    arr[i] = current;
-  }
+	let current = 0;
+	for (let i = 0; i < max; i++) {
+		current += arr[i];
+		arr[i] = current;
+	}
 
-  const merged = new Array<[number, number]>();
-  let start: number | null = null;
-  for (let i = 0; i < max; i++) {
-    if (start === null && arr[i] !== 0) {
-      start = i;
-    }
+	const merged = new Array<[number, number]>();
+	let start: number | null = null;
+	for (let i = 0; i < max; i++) {
+		if (start === null && arr[i] !== 0) {
+			start = i;
+		}
 
-    if (start !== null && arr[i] === 0) {
-      merged.push([start + 1, i + 1]);
-      start = null;
-    }
-  }
+		if (start !== null && arr[i] === 0) {
+			merged.push([start + 1, i + 1]);
+			start = null;
+		}
+	}
 
-  return merged;
+	return merged;
 };

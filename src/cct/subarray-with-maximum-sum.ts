@@ -8,13 +8,13 @@ Given the following integer array, find the contiguous subarray (containing at l
 */
 
 export const subarrayWithMaximumSum = (input: number[]) => {
-  let max = 0;
-  for (let i = 0; i < input.length; i++) {
-    let sum = 0;
-    for (let j = i; j < input.length; j++) {
-      sum += input[j];
-      max = Math.max(sum, max);
-    }
-  }
-  return max;
+	let max = 0;
+	for (let i = 0; i < input.length; i++) {
+		let sum = 0;
+		for (let j = i; j < input.length; j++) {
+			sum += input[j];
+			max = Math.max(sum, max);
+		}
+	}
+	return max;
 };

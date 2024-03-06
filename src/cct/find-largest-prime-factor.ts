@@ -8,41 +8,41 @@ A prime factor is a factor that is a prime number. What is the largest prime fac
 import { NS } from "@ns";
 
 const factor = (n: number) => {
-  const factors = new Set<number>();
+	const factors = new Set<number>();
 
-  let i = 1;
-  let sq = i * i;
-  while (sq <= n) {
-    if (n % i === 0) {
-      factors.add(i);
-      factors.add(n / i);
-    }
+	let i = 1;
+	let sq = i * i;
+	while (sq <= n) {
+		if (n % i === 0) {
+			factors.add(i);
+			factors.add(n / i);
+		}
 
-    i += 1;
-    sq = i * i;
-  }
+		i += 1;
+		sq = i * i;
+	}
 
-  return Array.from(factors).sort((x, y) => x - y);
+	return Array.from(factors).sort((x, y) => x - y);
 };
 
 const isPrime = (n: number) => {
-  let i = 2;
-  let sq = i * i;
-  while (sq <= n) {
-    if (n % i === 0) {
-      return false;
-    }
+	let i = 2;
+	let sq = i * i;
+	while (sq <= n) {
+		if (n % i === 0) {
+			return false;
+		}
 
-    i += 1;
-    sq = i * i;
-  }
+		i += 1;
+		sq = i * i;
+	}
 
-  return true;
+	return true;
 };
 
 export const findLargestPrimeFactor = (n: number) =>
-  Math.max(...factor(n).filter((x) => isPrime(x)));
+	Math.max(...factor(n).filter((x) => isPrime(x)));
 
 export const main = (ns: NS) => {
-  ns.tprint(findLargestPrimeFactor(847822246));
+	ns.tprint(findLargestPrimeFactor(847822246));
 };

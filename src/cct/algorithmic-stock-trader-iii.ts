@@ -15,44 +15,44 @@ If no profit can be made, then the answer should be 0
 import { NS } from "@ns";
 
 const find = (prices: number[]) => {
-  let current_max = 0;
+	let current_max = 0;
 
-  for (let buyAt = 0; buyAt < prices.length - 1; buyAt++) {
-    const buy = prices[buyAt];
-    for (let sellAt = buyAt + 1; sellAt < prices.length; sellAt++) {
-      const sell = prices[sellAt];
-      const score = sell - buy;
+	for (let buyAt = 0; buyAt < prices.length - 1; buyAt++) {
+		const buy = prices[buyAt];
+		for (let sellAt = buyAt + 1; sellAt < prices.length; sellAt++) {
+			const sell = prices[sellAt];
+			const score = sell - buy;
 
-      if (current_max < score) {
-        current_max = score;
-      }
-    }
-  }
+			if (current_max < score) {
+				current_max = score;
+			}
+		}
+	}
 
-  return current_max;
+	return current_max;
 };
 
 export const algorithmicStockTraderIII = (prices: number[]) => {
-  let current_max = find(prices);
+	let current_max = find(prices);
 
-  for (let i = 2; i < prices.length - 1; i++) {
-    const left = prices.slice(0, i);
-    const right = prices.slice(i, prices.length);
+	for (let i = 2; i < prices.length - 1; i++) {
+		const left = prices.slice(0, i);
+		const right = prices.slice(i, prices.length);
 
-    const score = find(left) + find(right);
-    if (current_max < score) {
-      current_max = score;
-    }
-  }
+		const score = find(left) + find(right);
+		if (current_max < score) {
+			current_max = score;
+		}
+	}
 
-  return current_max;
+	return current_max;
 };
 
 export const main = (ns: NS) => {
-  const prices = [
-    110, 99, 13, 193, 52, 163, 163, 84, 81, 181, 136, 26, 84, 156, 195, 98, 118,
-    16, 131, 165, 111, 2, 71,
-  ];
+	const prices = [
+		110, 99, 13, 193, 52, 163, 163, 84, 81, 181, 136, 26, 84, 156, 195, 98, 118,
+		16, 131, 165, 111, 2, 71,
+	];
 
-  ns.tprint(algorithmicStockTraderIII(prices));
+	ns.tprint(algorithmicStockTraderIII(prices));
 };

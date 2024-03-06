@@ -35,50 +35,50 @@ Answer: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]
 */
 
 export const spiralizeMatrix = (input: number[][]) => {
-  const map = input.map((x) => [0, ...x, 0]);
-  map.unshift(new Array(map[0].length).fill(0));
-  map.push(new Array(map[0].length).fill(0));
+	const map = input.map((x) => [0, ...x, 0]);
+	map.unshift(new Array(map[0].length).fill(0));
+	map.push(new Array(map[0].length).fill(0));
 
-  const directions = [
-    [1, 0],
-    [0, 1],
-    [-1, 0],
-    [0, -1],
-  ];
-  let d = 0;
+	const directions = [
+		[1, 0],
+		[0, 1],
+		[-1, 0],
+		[0, -1],
+	];
+	let d = 0;
 
-  const result = new Array<number>();
-  let x = 1;
-  let y = 1;
-  while (true) {
-    console.log({ x, y, d });
-    console.log(map);
+	const result = new Array<number>();
+	let x = 1;
+	let y = 1;
+	while (true) {
+		console.log({ x, y, d });
+		console.log(map);
 
-    const [dx, dy] = directions[d];
-    const x_ = x + dx;
-    const y_ = y + dy;
+		const [dx, dy] = directions[d];
+		const x_ = x + dx;
+		const y_ = y + dy;
 
-    if (map[y_][x_] !== 0) {
-      result.push(map[y][x]);
-      map[y][x] = 0;
+		if (map[y_][x_] !== 0) {
+			result.push(map[y][x]);
+			map[y][x] = 0;
 
-      x = x_;
-      y = y_;
-      continue;
-    }
+			x = x_;
+			y = y_;
+			continue;
+		}
 
-    if (
-      map[y][x - 1] === 0 &&
-      map[y][x + 1] === 0 &&
-      map[y - 1][x] === 0 &&
-      map[y + 1][x] === 0
-    ) {
-      result.push(map[y][x]);
-      break;
-    }
+		if (
+			map[y][x - 1] === 0 &&
+			map[y][x + 1] === 0 &&
+			map[y - 1][x] === 0 &&
+			map[y + 1][x] === 0
+		) {
+			result.push(map[y][x]);
+			break;
+		}
 
-    d = (d + 1) % directions.length;
-  }
+		d = (d + 1) % directions.length;
+	}
 
-  return result;
+	return result;
 };

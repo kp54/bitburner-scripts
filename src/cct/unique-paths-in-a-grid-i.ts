@@ -15,18 +15,18 @@ NOTE: The data returned for this contract is an array with the number of rows an
 import { NS } from "@ns";
 
 const factorial = (n: number) => {
-  let x = 1;
-  for (let i = 1; i <= n; i++) {
-    x *= i;
-  }
-  return x;
+	let x = 1;
+	for (let i = 1; i <= n; i++) {
+		x *= i;
+	}
+	return x;
 };
 
 export const uniquePathsInAGridI = (input: [number, number]) => {
-  const [rows, cols] = input;
-  return factorial(rows + cols - 2) / factorial(rows - 1) / factorial(cols - 1);
+	const [rows, cols] = input;
+	return factorial(rows + cols - 2) / factorial(rows - 1) / factorial(cols - 1);
 };
 
 export const main = (ns: NS) => {
-  ns.tprint(uniquePathsInAGridI([4, 14]));
+	ns.tprint(uniquePathsInAGridI([4, 14]));
 };

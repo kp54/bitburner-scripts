@@ -14,17 +14,17 @@ If no profit can be made then the answer should be 0. Note that you have to buy 
 import { NS } from "@ns";
 
 export const algorithmicStockTraderI = (input: number[]) => {
-  let max = 0;
+	let max = 0;
 
-  for (let i = 0; i < input.length - 1; i++) {
-    for (let j = i + 1; j < input.length; j++) {
-      max = Math.max(max, input[j] - input[i]);
-    }
-  }
+	for (let i = 0; i < input.length - 1; i++) {
+		for (let j = i + 1; j < input.length; j++) {
+			max = Math.max(max, input[j] - input[i]);
+		}
+	}
 
-  return max;
+	return max;
 };
 
 export const main = (ns: NS) => {
-  ns.tprint(algorithmicStockTraderI([193, 88, 125]));
+	ns.tprint(algorithmicStockTraderI([193, 88, 125]));
 };

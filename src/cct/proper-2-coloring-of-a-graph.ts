@@ -30,80 +30,80 @@ Output: [0, 1, 1, 1, 1, 0, 0, 0, 0]
 import { NS } from "@ns";
 
 export const proper2ColoringOfAGraph = (
-  input: [number, [number, number][]],
+	input: [number, [number, number][]],
 ) => {
-  const [size, edges] = input;
+	const [size, edges] = input;
 
-  const adjs = new Array(size).fill(0).map(() => new Set<number>());
-  for (const [x, y] of edges) {
-    adjs[x].add(y);
-    adjs[y].add(x);
-  }
+	const adjs = new Array(size).fill(0).map(() => new Set<number>());
+	for (const [x, y] of edges) {
+		adjs[x].add(y);
+		adjs[y].add(x);
+	}
 
-  const sideA = new Set<number>();
-  const sideB = new Set<number>();
+	const sideA = new Set<number>();
+	const sideB = new Set<number>();
 
-  const visited = new Set<number>();
+	const visited = new Set<number>();
 
-  for (let i = 0; i < size; i++) {
-    const queue = [i];
+	for (let i = 0; i < size; i++) {
+		const queue = [i];
 
-    while (true) {
-      const node = queue.shift();
-      if (node === undefined) {
-        break;
-      }
-      if (visited.has(node)) {
-        continue;
-      }
-      visited.add(node);
+		while (true) {
+			const node = queue.shift();
+			if (node === undefined) {
+				break;
+			}
+			if (visited.has(node)) {
+				continue;
+			}
+			visited.add(node);
 
-      let sideX = sideA;
-      let sideY = sideB;
+			let sideX = sideA;
+			let sideY = sideB;
 
-      if (sideY.has(node)) {
-        [sideX, sideY] = [sideY, sideX];
-      }
+			if (sideY.has(node)) {
+				[sideX, sideY] = [sideY, sideX];
+			}
 
-      for (const adj of adjs[node]) {
-        if (sideX.has(adj)) {
-          return [];
-        }
-        sideY.add(adj);
-        queue.push(adj);
-      }
-    }
-  }
+			for (const adj of adjs[node]) {
+				if (sideX.has(adj)) {
+					return [];
+				}
+				sideY.add(adj);
+				queue.push(adj);
+			}
+		}
+	}
 
-  const result = new Array<number>();
-  for (let i = 0; i < size; i++) {
-    if (sideA.has(i)) {
-      result.push(0);
-    } else {
-      result.push(1);
-    }
-  }
+	const result = new Array<number>();
+	for (let i = 0; i < size; i++) {
+		if (sideA.has(i)) {
+			result.push(0);
+		} else {
+			result.push(1);
+		}
+	}
 
-  return result;
+	return result;
 };
 
 export const main = (ns: NS) => {
-  ns.tprint(
-    proper2ColoringOfAGraph([
-      9,
-      [
-        [2, 5],
-        [1, 8],
-        [3, 6],
-        [0, 4],
-        [4, 8],
-        [2, 7],
-        [4, 6],
-        [1, 7],
-        [1, 5],
-        [1, 6],
-        [0, 1],
-      ],
-    ]),
-  );
+	ns.tprint(
+		proper2ColoringOfAGraph([
+			9,
+			[
+				[2, 5],
+				[1, 8],
+				[3, 6],
+				[0, 4],
+				[4, 8],
+				[2, 7],
+				[4, 6],
+				[1, 7],
+				[1, 5],
+				[1, 6],
+				[0, 1],
+			],
+		]),
+	);
 };

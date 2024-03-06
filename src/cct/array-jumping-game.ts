@@ -16,26 +16,26 @@ Your answer should be submitted as 1 or 0, representing true and false respectiv
 import { NS } from "@ns";
 
 export const arrayJumpingGame = (arr: number[]) => {
-  const reachable = new Array(arr.length).fill(false);
-  reachable[0] = true;
-  for (let i = 0; i < arr.length; i++) {
-    if (reachable[i] === false) {
-      continue;
-    }
+	const reachable = new Array(arr.length).fill(false);
+	reachable[0] = true;
+	for (let i = 0; i < arr.length; i++) {
+		if (reachable[i] === false) {
+			continue;
+		}
 
-    for (let j = 0; j <= arr[i]; j++) {
-      if (arr.length <= j) {
-        break;
-      }
+		for (let j = 0; j <= arr[i]; j++) {
+			if (arr.length <= j) {
+				break;
+			}
 
-      reachable[i + j] = true;
-    }
-  }
+			reachable[i + j] = true;
+		}
+	}
 
-  return reachable[arr.length - 1] ? 1 : 0;
+	return reachable[arr.length - 1] ? 1 : 0;
 };
 
 export const main = (ns: NS) => {
-  const arr = [7, 0, 1, 9, 0, 10, 1, 0, 10, 2, 7, 5, 0];
-  ns.tprint(arrayJumpingGame(arr));
+	const arr = [7, 0, 1, 9, 0, 10, 1, 0, 10, 2, 7, 5, 0];
+	ns.tprint(arrayJumpingGame(arr));
 };

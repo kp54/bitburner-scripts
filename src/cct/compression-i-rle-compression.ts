@@ -19,32 +19,32 @@ Examples:
 import { NS } from "@ns";
 
 export const compressionI_RleCompression = (input: string) => {
-  const line = `${input}\0`;
+	const line = `${input}\0`;
 
-  let run = 1;
-  let char = line[0];
-  const codes = new Array<string>();
+	let run = 1;
+	let char = line[0];
+	const codes = new Array<string>();
 
-  for (let i = 1; i < line.length; i++) {
-    const cur = line[i];
+	for (let i = 1; i < line.length; i++) {
+		const cur = line[i];
 
-    if (run === 9 || cur !== char) {
-      codes.push(`${run}${char}`);
-      run = 1;
-      char = cur;
-      continue;
-    }
+		if (run === 9 || cur !== char) {
+			codes.push(`${run}${char}`);
+			run = 1;
+			char = cur;
+			continue;
+		}
 
-    run += 1;
-  }
+		run += 1;
+	}
 
-  return codes.join("");
+	return codes.join("");
 };
 
 export const main = (ns: NS) => {
-  ns.tprint(
-    compressionI_RleCompression(
-      "zzvlECCCCCCCCCCCCCB1rrTwXXXXXXXXXXXXjjjjjjjiGGHHHHHHHr4UUUUxxxxxxxXggz66ggNN6wTTvvvvvvvvvvv",
-    ),
-  );
+	ns.tprint(
+		compressionI_RleCompression(
+			"zzvlECCCCCCCCCCCCCB1rrTwXXXXXXXXXXXXjjjjjjjiGGHHHHHHHr4UUUUxxxxxxxXggz66ggNN6wTTvvvvvvvvvvv",
+		),
+	);
 };
