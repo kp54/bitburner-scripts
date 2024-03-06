@@ -11,15 +11,7 @@ const test = async (ns: NS, host: string, type: string) => {
 
   const startAt = Date.now();
   for (let i = 0; i < 128; i++) {
-    ns.codingcontract.createDummyContract(type);
-    const file = ns
-      .ls(host)
-      .filter((x) => x.endsWith(".cct"))
-      .shift();
-    if (file === undefined) {
-      throw new Error();
-    }
-
+    const file = ns.codingcontract.createDummyContract(type);
     const input = ns.codingcontract.getData(file, host);
     const output = solver(input);
     const result = ns.codingcontract.attempt(output, file, host);
