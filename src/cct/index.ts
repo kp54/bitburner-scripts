@@ -5,6 +5,7 @@ import { arrayJumpingGame } from "cct/array-jumping-game";
 import { arrayJumpingGameII } from "cct/array-jumping-game-ii";
 import { compressionI_RleCompression } from "cct/compression-i-rle-compression";
 import { encryptionI_CaesarCipher } from "cct/encryption-i-caesar-cipher";
+import { encryptionII_VigenereCipher } from "cct/encryption-ii-vigenere-cipher";
 import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions";
 import { findLargestPrimeFactor } from "cct/find-largest-prime-factor";
 import { generateIpAddresses } from "cct/generate-ip-addresses";
@@ -29,6 +30,7 @@ export const solvers = new Map<string, Solver>([
 	["Array Jumping Game II", arrayJumpingGameII],
 	["Compression I: RLE Compression", compressionI_RleCompression],
 	["Encryption I: Caesar Cipher", encryptionI_CaesarCipher],
+	["Encryption II: Vigenère Cipher", encryptionII_VigenereCipher],
 	["Find All Valid Math Expressions", findAllValidMathExpressions],
 	["Find Largest Prime Factor", findLargestPrimeFactor],
 	["Generate IP Addresses", generateIpAddresses],
