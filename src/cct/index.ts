@@ -10,6 +10,7 @@ import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions
 import { findLargestPrimeFactor } from "cct/find-largest-prime-factor";
 import { generateIpAddresses } from "cct/generate-ip-addresses";
 import { mergeOverlappingIntervals } from "cct/merge-overlapping-intervals";
+import { minimumPathSumInATriangle } from "cct/minimum-path-sum-in-a-triangle";
 import { proper2ColoringOfAGraph } from "cct/proper-2-coloring-of-a-graph";
 import { shortestPathInAGrid } from "cct/shortest-path-in-a-grid";
 import { spiralizeMatrix } from "cct/spiralize-matrix";
@@ -35,6 +36,7 @@ export const solvers = new Map<string, Solver>([
 	["Find Largest Prime Factor", findLargestPrimeFactor],
 	["Generate IP Addresses", generateIpAddresses],
 	["Merge Overlapping Intervals", mergeOverlappingIntervals],
+	["Minimum Path Sum in a Triangle", minimumPathSumInATriangle],
 	["Proper 2-Coloring of a Graph", proper2ColoringOfAGraph],
 	["Shortest Path in a Grid", shortestPathInAGrid],
 	["Spiralize Matrix", spiralizeMatrix],
