@@ -4,6 +4,7 @@ import { algorithmicStockTraderIV } from "cct/algorithmic-stock-trader-iv";
 import { arrayJumpingGame } from "cct/array-jumping-game";
 import { arrayJumpingGameII } from "cct/array-jumping-game-ii";
 import { compressionI_RleCompression } from "cct/compression-i-rle-compression";
+import { compressionII_LZDecompression } from "cct/compression-ii-lz-decompression";
 import { encryptionI_CaesarCipher } from "cct/encryption-i-caesar-cipher";
 import { encryptionII_VigenereCipher } from "cct/encryption-ii-vigenere-cipher";
 import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions";
@@ -31,6 +32,7 @@ export const solvers = new Map<string, Solver>([
 	["Array Jumping Game", arrayJumpingGame],
 	["Array Jumping Game II", arrayJumpingGameII],
 	["Compression I: RLE Compression", compressionI_RleCompression],
+	["Compression II: LZ Decompression", compressionII_LZDecompression],
 	["Encryption I: Caesar Cipher", encryptionI_CaesarCipher],
 	["Encryption II: Vigenère Cipher", encryptionII_VigenereCipher],
 	["Find All Valid Math Expressions", findAllValidMathExpressions],
