@@ -11,6 +11,7 @@ import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions
 import { findLargestPrimeFactor } from "cct/find-largest-prime-factor";
 import { generateIpAddresses } from "cct/generate-ip-addresses";
 import { hammingCodes_EncodedBinaryToInteger } from "cct/hamming-codes-encoded-binary-to-integer";
+import { hammingCodes_IntegerToEncodedBinary } from "cct/hamming-codes-integer-to-encoded-binary";
 import { mergeOverlappingIntervals } from "cct/merge-overlapping-intervals";
 import { minimumPathSumInATriangle } from "cct/minimum-path-sum-in-a-triangle";
 import { proper2ColoringOfAGraph } from "cct/proper-2-coloring-of-a-graph";
@@ -42,6 +43,10 @@ export const solvers = new Map<string, Solver>([
 	[
 		"HammingCodes: Encoded Binary to Integer",
 		hammingCodes_EncodedBinaryToInteger,
+	],
+	[
+		"HammingCodes: Integer to Encoded Binary",
+		hammingCodes_IntegerToEncodedBinary,
 	],
 	["Merge Overlapping Intervals", mergeOverlappingIntervals],
 	["Minimum Path Sum in a Triangle", minimumPathSumInATriangle],
