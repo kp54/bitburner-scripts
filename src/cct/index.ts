@@ -12,6 +12,7 @@ import { generateIpAddresses } from "cct/generate-ip-addresses";
 import { mergeOverlappingIntervals } from "cct/merge-overlapping-intervals";
 import { minimumPathSumInATriangle } from "cct/minimum-path-sum-in-a-triangle";
 import { proper2ColoringOfAGraph } from "cct/proper-2-coloring-of-a-graph";
+import { sanitizeParenthesesInExpression } from "cct/sanitize-parentheses-in-expression";
 import { shortestPathInAGrid } from "cct/shortest-path-in-a-grid";
 import { spiralizeMatrix } from "cct/spiralize-matrix";
 import { subarrayWithMaximumSum } from "cct/subarray-with-maximum-sum";
@@ -38,6 +39,7 @@ export const solvers = new Map<string, Solver>([
 	["Merge Overlapping Intervals", mergeOverlappingIntervals],
 	["Minimum Path Sum in a Triangle", minimumPathSumInATriangle],
 	["Proper 2-Coloring of a Graph", proper2ColoringOfAGraph],
+	["Sanitize Parentheses in Expression", sanitizeParenthesesInExpression],
 	["Shortest Path in a Grid", shortestPathInAGrid],
 	["Spiralize Matrix", spiralizeMatrix],
 	["Subarray with Maximum Sum", subarrayWithMaximumSum],
