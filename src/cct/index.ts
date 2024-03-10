@@ -10,6 +10,7 @@ import { encryptionII_VigenereCipher } from "cct/encryption-ii-vigenere-cipher";
 import { findAllValidMathExpressions } from "cct/find-all-valid-math-expressions";
 import { findLargestPrimeFactor } from "cct/find-largest-prime-factor";
 import { generateIpAddresses } from "cct/generate-ip-addresses";
+import { hammingCodes_EncodedBinaryToInteger } from "cct/hamming-codes-encoded-binary-to-integer";
 import { mergeOverlappingIntervals } from "cct/merge-overlapping-intervals";
 import { minimumPathSumInATriangle } from "cct/minimum-path-sum-in-a-triangle";
 import { proper2ColoringOfAGraph } from "cct/proper-2-coloring-of-a-graph";
@@ -38,6 +39,10 @@ export const solvers = new Map<string, Solver>([
 	["Find All Valid Math Expressions", findAllValidMathExpressions],
 	["Find Largest Prime Factor", findLargestPrimeFactor],
 	["Generate IP Addresses", generateIpAddresses],
+	[
+		"HammingCodes: Encoded Binary to Integer",
+		hammingCodes_EncodedBinaryToInteger,
+	],
 	["Merge Overlapping Intervals", mergeOverlappingIntervals],
 	["Minimum Path Sum in a Triangle", minimumPathSumInATriangle],
 	["Proper 2-Coloring of a Graph", proper2ColoringOfAGraph],
