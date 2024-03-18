@@ -1,7 +1,7 @@
 import { NS } from "@ns";
-import { autoDeploy } from "auto-deploy";
-import { fill } from "fill";
-import { findOptimTargets } from "find-optim-target";
+import { autoDeploy } from "/auto-deploy";
+import { fill } from "/fill";
+import { findOptimTargets } from "/find-optim-target";
 
 export const main = async (ns: NS) => {
 	const state = {

@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { showMissing, startHack } from "./lib/hack-kit";
+import { showMissing, startHack } from "/lib/hack-kit";
 
 export const main = async (ns: NS) => {
 	if (ns.args.length !== 2) {

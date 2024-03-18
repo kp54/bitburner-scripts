@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { Port } from "lib/ports";
+import { Port } from "/lib/ports";
 
 export const canHack = (ns: NS, host: string) =>
 	ns.getServerRequiredHackingLevel(host) <= ns.getHackingLevel();

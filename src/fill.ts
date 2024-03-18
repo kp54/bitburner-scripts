@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { showMissing, startHack } from "./lib/hack-kit";
+import { showMissing, startHack } from "/lib/hack-kit";
 
 export const fill = (ns: NS, target: string) => {
 	const host = ns.getHostname();

@@ -1,6 +1,6 @@
 import { NS } from "@ns";
-import { openNuke } from "lib/hack-kit";
-import { walk } from "lib/net-walker";
+import { openNuke } from "/lib/hack-kit";
+import { walk } from "/lib/net-walker";
 
 const usage = (ns: NS) => {
 	ns.tprint("usage: rec-deploy FILE [ARGS...]");

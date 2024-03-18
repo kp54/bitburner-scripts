@@ -1,7 +1,7 @@
 import { NS } from "@ns";
-import { walk } from "lib/net-walker";
-import { solvers } from "./cct/index";
-import { tabulate } from "./lib/pretty";
+import { solvers } from "/cct/index";
+import { walk } from "/lib/net-walker";
+import { tabulate } from "/lib/pretty";
 
 export const main = async (ns: NS) => {
 	const ccts = new Array<Array<string>>();

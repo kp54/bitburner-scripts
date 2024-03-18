@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { walk } from "lib/net-walker";
+import { walk } from "/lib/net-walker";
 
 export const main = async (ns: NS) => {
 	await walk(ns, (host) => {

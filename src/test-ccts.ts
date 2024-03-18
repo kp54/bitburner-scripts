@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { solvers } from "./cct/index";
+import { solvers } from "/cct/index";
 
 const test = async (ns: NS, host: string, type: string) => {
 	const solver = solvers.get(type);

@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { Port } from "lib/ports";
+import { Port } from "/lib/ports";
 
 export const main = async (ns: NS) => {
 	if (ns.args.length !== 1) {
