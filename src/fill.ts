@@ -1,16 +1,6 @@
 import { NS } from "@ns";
-import { showMissing, startHack } from "/lib/hack-kit";
-
-export const fill = (ns: NS, target: string) => {
-	const host = ns.getHostname();
-
-	const max = ns.getServerMaxRam(host);
-	const reserve = Math.min(24, Math.floor(max * 0.25));
-	const used = ns.getServerUsedRam(host);
-	const available = max - used - reserve;
-
-	startHack(ns, host, target, available);
-};
+import { showMissing } from "/lib/hack-kit";
+import { useHome } from "/lib/use-home";
 
 export const main = (ns: NS) => {
 	if (ns.args.length !== 1) {
@@ -23,5 +13,5 @@ export const main = (ns: NS) => {
 		return;
 	}
 
-	fill(ns, target);
+	useHome(ns, target);
 };

@@ -1,26 +1,17 @@
 import { NS } from "@ns";
-import { autoDeploy } from "/auto-deploy";
-import { fill } from "/fill";
-import { findOptimTargets } from "/find-optim-target";
+import { addPserv } from "/bot/add-pserv";
+import { initialTarget, updateTarget } from "/bot/update-target";
+import { upgradePserv } from "/bot/upgrade-pserv";
 
 export const main = async (ns: NS) => {
 	const state = {
-		target: {
-			name: "n00dles",
-			score: 0,
-		},
+		target: initialTarget(),
 	};
 
 	while (true) {
-		const target = (await findOptimTargets(ns, 1)).shift();
-
-		if (target !== undefined && state.target.score < target.score) {
-			await autoDeploy(ns, target.host);
-			fill(ns, target.host);
-
-			state.target.name = target.host;
-			state.target.score = target.score;
-		}
+		addPserv(ns, state.target.name);
+		upgradePserv(ns, state.target.name);
+		state.target = await updateTarget(ns, state.target);
 
 		await ns.asleep(60 * 1000);
 	}
