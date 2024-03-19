@@ -1,0 +1,17 @@
+export const GangTasks = {
+	Unassigned: "Unassigned",
+	Ransomware: "Ransomware",
+	Phishing: "Phishing",
+	IdentityTheft: "Identity Theft",
+	DDoSAttacks: "DDoS Attacks",
+	PlantVirus: "Plant Virus",
+	FraudAndCounterfeiting: "Fraud & Counterfeiting",
+	MoneyLaundering: "Money Laundering",
+	Cyberterrorism: "Cyberterrorism",
+	EthicalHacking: "Ethical Hacking",
+	VigilanteJustice: "Vigilante Justice",
+	TrainCombat: "Train Combat",
+	TrainHacking: "Train Hacking",
+	TrainCharisma: "Train Charisma",
+	TerritoryWarfare: "Territory Warfare",
+} as const;
