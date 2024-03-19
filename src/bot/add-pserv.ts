@@ -1,5 +1,6 @@
 import { NS } from "@ns";
 import { startHack } from "/lib/hack-kit";
+import { pserv } from "/lib/pserv-i";
 
 export const addPserv = (ns: NS, target: string) => {
 	const serverLimit = ns.getPurchasedServerLimit();
@@ -14,7 +15,7 @@ export const addPserv = (ns: NS, target: string) => {
 	}
 
 	for (let i = 0; i < serverLimit; i++) {
-		ns.purchaseServer(`pserv-${i}`, 8);
-		startHack(ns, `pserv-${i}`, target);
+		ns.purchaseServer(pserv(i), 8);
+		startHack(ns, pserv(i), target);
 	}
 };
