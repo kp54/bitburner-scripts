@@ -2,6 +2,10 @@ import { NS } from "@ns";
 import { startHack } from "/lib/hack-kit";
 
 export const upgradePserv = (ns: NS, target: string) => {
+	if (!ns.serverExists("pserv-0")) {
+		return;
+	}
+
 	const currentRam = ns.getServerMaxRam("pserv-0");
 	if (currentRam === ns.getPurchasedServerMaxRam()) {
 		return;
