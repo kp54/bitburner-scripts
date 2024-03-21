@@ -11,10 +11,12 @@ export const recruitAndAscend = (ns: NS) => {
 
 	const members = ns.gang.getMemberNames();
 
-	for (let i = 0; i < ns.gang.getRecruitsAvailable(); i++) {
-		const name = gang(members.length + i);
-		ns.gang.recruitMember(name);
-		ns.gang.setMemberTask(name, GangTasks.TrainHacking);
+	if (ns.gang.canRecruitMember()) {
+		for (let i = 0; i < ns.gang.getRecruitsAvailable(); i++) {
+			const name = gang(members.length + i);
+			ns.gang.recruitMember(name);
+			ns.gang.setMemberTask(name, GangTasks.TrainHacking);
+		}
 	}
 
 	for (const member of members) {
