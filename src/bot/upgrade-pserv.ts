@@ -14,11 +14,12 @@ export const upgradePserv = (ns: NS, target: string) => {
 		return;
 	}
 
+	const offset = 500 * 10 ** 6;
 	const serverLimit = ns.getPurchasedServerLimit();
 	const cost =
 		ns.getPurchasedServerUpgradeCost(pserv0, currentRam * 2) * serverLimit;
 	const available = ns.getServerMoneyAvailable("home");
-	if (available < cost) {
+	if (available - offset < cost) {
 		return;
 	}
 
