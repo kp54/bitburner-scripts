@@ -1,4 +1,5 @@
 import { NS } from "@ns";
+import { calcSetupCost } from "/bot/calc-setup-cost";
 import { startHack } from "/lib/hack-kit";
 import { pserv } from "/lib/pserv-i";
 
@@ -14,12 +15,12 @@ export const upgradePserv = (ns: NS, target: string) => {
 		return;
 	}
 
-	const offset = 500 * 10 ** 6;
+	const reserved = calcSetupCost(ns);
 	const serverLimit = ns.getPurchasedServerLimit();
-	const cost =
+	const serverCost =
 		ns.getPurchasedServerUpgradeCost(pserv0, currentRam * 2) * serverLimit;
 	const available = ns.getServerMoneyAvailable("home");
-	if (available - offset < cost) {
+	if (available - reserved < serverCost) {
 		return;
 	}
 
