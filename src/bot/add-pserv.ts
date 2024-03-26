@@ -1,6 +1,6 @@
 import { NS } from "@ns";
-import { startHack } from "/lib/hack-kit";
 import { pserv } from "/lib/pserv-i";
+import { startHack } from "/lib/start-hack";
 
 export const addPserv = (ns: NS, target: string) => {
 	const serverLimit = ns.getPurchasedServerLimit();

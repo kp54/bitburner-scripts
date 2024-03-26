@@ -1,5 +1,5 @@
 import { NS } from "@ns";
-import { startHack } from "/lib/hack-kit";
+import { startHack } from "/lib/start-hack";
 
 export const useHome = (ns: NS, target: string) => {
 	const host = ns.getHostname();

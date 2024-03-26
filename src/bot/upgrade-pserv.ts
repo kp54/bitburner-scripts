@@ -1,7 +1,7 @@
 import { NS } from "@ns";
 import { calcSetupCost } from "/bot/calc-setup-cost";
-import { startHack } from "/lib/hack-kit";
 import { pserv } from "/lib/pserv-i";
+import { startHack } from "/lib/start-hack";
 
 const pserv0 = pserv(0);
 

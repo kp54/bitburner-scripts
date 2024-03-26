@@ -1,6 +1,7 @@
 import { NS } from "@ns";
-import { canHack, openNuke } from "/lib/hack-kit";
+import { canHack } from "/lib/can-hack";
 import { walk } from "/lib/net-walker";
+import { openNuke } from "/lib/open-nuke";
 
 export const findOptimTargets = async (ns: NS, limit: number) => {
 	const hosts = new Array<{ host: string; score: number }>();

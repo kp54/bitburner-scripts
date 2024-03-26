@@ -1,6 +1,7 @@
 import { NS } from "@ns";
-import { openNuke, startHack } from "/lib/hack-kit";
 import { walk } from "/lib/net-walker";
+import { openNuke } from "/lib/open-nuke";
+import { startHack } from "/lib/start-hack";
 
 export const autoDeploy = async (ns: NS, target: string) => {
 	const knownHosts = new Set<string>([ns.getHostname()]);
