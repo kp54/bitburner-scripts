@@ -15,6 +15,10 @@ const tasks = [
 ];
 
 export const assignTasks = async (ns: NS) => {
+	if (!ns.gang.inGang()) {
+		return;
+	}
+
 	const members = ns.gang.getMemberNames();
 	for (const member of members) {
 		const mem = ns.gang.getMemberInformation(member);
