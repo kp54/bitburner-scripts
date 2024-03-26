@@ -16,8 +16,10 @@ export const startHack = (
 		return;
 	}
 
-	for (const src of sources) {
-		ns.scp(src, host);
+	if (host !== ns.getHostname()) {
+		for (const src of sources) {
+			ns.scp(src, host);
+		}
 	}
 
 	const capacity = Math.floor(ram / ns.getScriptRam(script, host));
