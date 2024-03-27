@@ -51,9 +51,6 @@ export const spiralizeMatrix = (input: number[][]) => {
 	let x = 1;
 	let y = 1;
 	while (true) {
-		console.log({ x, y, d });
-		console.log(map);
-
 		const [dx, dy] = directions[d];
 		const x_ = x + dx;
 		const y_ = y + dy;

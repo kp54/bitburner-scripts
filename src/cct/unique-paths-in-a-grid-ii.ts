@@ -44,8 +44,6 @@ export const uniquePathsInAGridII = (input: number[][]) => {
 		}
 	}
 
-	console.log(map);
-
 	return map[height - 1][width - 1];
 };
 
