@@ -1,5 +1,37 @@
 import { ReactDOM } from "/lib/react";
 
+const makeDraggable = (
+	Document: Document,
+	container: HTMLElement,
+	knob: HTMLElement,
+) => {
+	let x = 0;
+	let y = 0;
+
+	container.style.userSelect = "none";
+
+	knob.onmousedown = (ev) => {
+		const x0 = x;
+		const y0 = y;
+		const x1 = ev.pageX;
+		const y1 = ev.pageY;
+		const onMousemove = (ev: MouseEvent) => {
+			const dx = ev.pageX - x1;
+			const dy = ev.pageY - y1;
+			x = x0 + dx;
+			y = y0 + dy;
+			container.style.transform = `translate(${x}px, ${y}px)`;
+		};
+
+		Document.addEventListener("mousemove", onMousemove);
+
+		knob.onmouseup = () => {
+			Document.removeEventListener("mousemove", onMousemove);
+			knob.onmouseup = null;
+		};
+	};
+};
+
 const createContainer = (Document: Document): HTMLDivElement => {
 	const root = Document.getElementById("root");
 
@@ -34,6 +66,8 @@ const createHeader = (Document: Document, container: HTMLDivElement) => {
 		e.preventDefault();
 		container.remove();
 	};
+
+	makeDraggable(Document, container, headerEl);
 
 	const setTitle = (title: string) => {
 		titleEl.innerText = title;
