@@ -16,11 +16,12 @@ export const upgradePserv = (ns: NS, target: string) => {
 	}
 
 	const reserved = calcSetupCost(ns);
+	const weight = 1.5;
 	const serverLimit = ns.getPurchasedServerLimit();
 	const serverCost =
 		ns.getPurchasedServerUpgradeCost(pserv0, currentRam * 2) * serverLimit;
 	const available = ns.getServerMoneyAvailable("home");
-	if (available - reserved < serverCost) {
+	if (available - reserved < serverCost * weight) {
 		return;
 	}
 
