@@ -1,5 +1,40 @@
 import { ReactDOM } from "/lib/react";
 
+const makeClosable = (container: HTMLElement, closer: HTMLElement) => {
+	const state: {
+		isClosed: boolean;
+		onClose: null | (() => unknown);
+	} = {
+		isClosed: false,
+		onClose: null,
+	};
+
+	const onClose = (listener: null | (() => unknown)) => {
+		state.onClose = listener;
+	};
+
+	const close = () => {
+		if (state.isClosed) {
+			return;
+		}
+		state.isClosed = true;
+		container.remove();
+		if (state.onClose !== null) {
+			state.onClose();
+		}
+	};
+
+	closer.onclick = (ev) => {
+		ev.preventDefault();
+		close();
+	};
+
+	return {
+		onClose,
+		close,
+	};
+};
+
 const makeDraggable = (
 	Document: Document,
 	container: HTMLElement,
@@ -62,12 +97,9 @@ const createHeader = (Document: Document, container: HTMLDivElement) => {
 	const closeEl = Document.createElement("div");
 	headerEl.appendChild(closeEl);
 	closeEl.innerText = "[x]";
-	closeEl.onclick = (e) => {
-		e.preventDefault();
-		container.remove();
-	};
 
 	makeDraggable(Document, container, headerEl);
+	const { onClose, close } = makeClosable(container, closeEl);
 
 	const setTitle = (title: string) => {
 		titleEl.innerText = title;
@@ -75,6 +107,8 @@ const createHeader = (Document: Document, container: HTMLDivElement) => {
 
 	return {
 		setTitle,
+		onClose,
+		close,
 	};
 };
 
@@ -97,11 +131,13 @@ export const createModal = () => {
 	const Document = globalThis["document"];
 
 	const container = createContainer(Document);
-	const { setTitle } = createHeader(Document, container);
+	const { setTitle, onClose, close } = createHeader(Document, container);
 	const { render } = createBody(Document, container);
 
 	return {
-		render,
 		setTitle,
+		onClose,
+		close,
+		render,
 	};
 };
