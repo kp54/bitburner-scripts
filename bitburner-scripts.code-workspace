@@ -18,6 +18,15 @@
 				"source.organizeImports": "explicit"
 			},
 			"typescript.preferences.importModuleSpecifier": "non-relative"
+		},
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "biomejs.biome",
+			"editor.formatOnSave": true,
+			"editor.codeActionsOnSave": {
+				"source.fixAll": "always",
+				"source.organizeImports": "explicit"
+			},
+			"typescript.preferences.importModuleSpecifier": "non-relative"
 		}
 	}
 }
