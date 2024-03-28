@@ -5,24 +5,31 @@ import { startHack } from "/lib/start-hack";
 
 const pserv0 = pserv(0);
 
+const calcUpgradeCost = (ns: NS, ram: number, serverLimit: number) => {
+	const reserved = calcSetupCost(ns);
+	const weight = 1.5;
+	const serverCost =
+		ns.getPurchasedServerUpgradeCost(pserv0, ram) * serverLimit;
+
+	return serverCost * weight + reserved;
+};
+
 export const upgradePserv = (ns: NS, target: string) => {
+	const serverLimit = ns.getPurchasedServerLimit();
+
 	if (!ns.serverExists(pserv0)) {
-		return;
+		return ns.getPurchasedServerCost(8) * serverLimit;
 	}
 
 	const currentRam = ns.getServerMaxRam(pserv0);
 	if (currentRam === ns.getPurchasedServerMaxRam()) {
-		return;
+		return 0;
 	}
 
-	const reserved = calcSetupCost(ns);
-	const weight = 1.5;
-	const serverLimit = ns.getPurchasedServerLimit();
-	const serverCost =
-		ns.getPurchasedServerUpgradeCost(pserv0, currentRam * 2) * serverLimit;
 	const available = ns.getServerMoneyAvailable("home");
-	if (available - reserved < serverCost * weight) {
-		return;
+	const required = calcUpgradeCost(ns, currentRam * 2, serverLimit);
+	if (available < required) {
+		return required;
 	}
 
 	for (let i = 0; i < serverLimit; i++) {
@@ -30,4 +37,6 @@ export const upgradePserv = (ns: NS, target: string) => {
 		ns.killall(pserv(i));
 		startHack(ns, pserv(i), target);
 	}
+
+	return calcUpgradeCost(ns, currentRam * 4, serverLimit);
 };

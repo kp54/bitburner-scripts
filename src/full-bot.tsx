@@ -15,80 +15,67 @@ type Switches = {
 	cct: boolean;
 };
 
-const Controller = ({
-	setSwitches,
-}: { setSwitches: (value: Switches) => void }) => {
-	const [state, setState] = React.useState({
-		pserv: false,
-		hack: false,
-		gang: false,
-		cct: false,
-	});
+const Controller = (props: {
+	nextUpgradeAt: string;
+	switches: Switches;
+	setSwitches: (value: Switches) => void;
+}) => {
+	const { nextUpgradeAt, switches, setSwitches } = props;
 
 	return (
 		<div
 			style={{
 				display: "grid",
-				gridTemplateColumns: "1fr 1fr",
+				gridTemplateColumns: "auto auto",
 				alignItems: "center",
 				gap: "0.5em",
 			}}
 		>
+			<div>next upgrade at</div>
+			<div>{nextUpgradeAt}</div>
 			<div>pserv</div>
 			<input
 				type="checkbox"
-				checked={state.pserv}
-				onClick={() => {
-					const newState: Switches = {
-						...state,
-						pserv: !state.pserv,
-					};
-
-					setState(newState);
-					setSwitches(newState);
-				}}
+				checked={switches.pserv}
+				onClick={() =>
+					setSwitches({
+						...switches,
+						pserv: !switches.pserv,
+					})
+				}
 			/>
 			<div>hack</div>
 			<input
 				type="checkbox"
-				checked={state.hack}
-				onClick={() => {
-					const newState: Switches = {
-						...state,
-						hack: !state.hack,
-					};
-
-					setState(newState);
-					setSwitches(newState);
-				}}
+				checked={switches.hack}
+				onClick={() =>
+					setSwitches({
+						...switches,
+						hack: !switches.hack,
+					})
+				}
 			/>
 			<div>gang</div>
 			<input
 				type="checkbox"
-				checked={state.gang}
-				onClick={() => {
-					const newState: Switches = {
-						...state,
-						gang: !state.gang,
-					};
-
-					setState(newState);
-					setSwitches(newState);
-				}}
+				checked={switches.gang}
+				onClick={() =>
+					setSwitches({
+						...switches,
+						gang: !switches.gang,
+					})
+				}
 			/>
 			<div>cct</div>
 			<input
 				type="checkbox"
-				checked={state.cct}
-				onClick={() => {
-					const newState: Switches = {
-						...state,
-						cct: !state.cct,
-					};
-
-					setState(newState);
-					setSwitches(newState);
-				}}
+				checked={switches.cct}
+				onClick={() =>
+					setSwitches({
+						...switches,
+						cct: !switches.cct,
+					})
+				}
 			/>
 		</div>
 	);
@@ -102,18 +89,44 @@ export const main = async (ns: NS) => {
 			gang: false,
 			cct: false,
 		},
+		nextUpgradeCost: 0,
 		target: initialTarget(),
 	};
 	const setSwitches = (switches: Switches) => {
 		state.switches = switches;
 	};
 
+	const modal = createModal();
+	modal.setTitle("bot controls");
+
+	(function render() {
+		modal.render(
+			<Controller
+				nextUpgradeAt={
+					state.switches.pserv
+						? ns.formatNumber(state.nextUpgradeCost)
+						: "<off>"
+				}
+				switches={state.switches}
+				setSwitches={setSwitches}
+			/>,
+		);
+		setTimeout(render, 100);
+	})();
+
+	modal.onClose(() => {
+		ns.exit();
+	});
+	ns.atExit(() => {
+		modal.close();
+	});
+
 	const actions: [() => boolean, () => void | Promise<void>][] = [
 		[
 			() => state.switches.pserv,
 			() => {
 				addPserv(ns, state.target.name);
-				upgradePserv(ns, state.target.name);
+				state.nextUpgradeCost = upgradePserv(ns, state.target.name);
 			},
 		],
 		[
@@ -136,17 +149,6 @@ export const main = async (ns: NS) => {
 			},
 		],
 	];
-
-	const modal = createModal();
-	modal.setTitle("bot controls");
-	modal.render(<Controller setSwitches={setSwitches} />);
-
-	modal.onClose(() => {
-		ns.exit();
-	});
-	ns.atExit(() => {
-		modal.close();
-	});
 
 	while (true) {
 		for (const [cond, action] of actions) {
