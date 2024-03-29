@@ -1,3 +1,4 @@
+import { NS } from "@ns";
 import { ReactDOM } from "/lib/react";
 
 const makeClosable = (container: HTMLElement, closer: HTMLElement) => {
@@ -134,10 +135,18 @@ export const createModal = () => {
 	const { setTitle, onClose, close } = createHeader(Document, container);
 	const { render } = createBody(Document, container);
 
+	const hookExit = (ns: NS) => {
+		onClose(() => {
+			ns.exit();
+		});
+		ns.atExit(() => {
+			close();
+		});
+	};
+
 	return {
 		setTitle,
-		onClose,
-		close,
 		render,
+		hookExit,
 	};
 };

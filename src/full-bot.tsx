@@ -114,12 +114,7 @@ export const main = async (ns: NS) => {
 		setTimeout(render, 100);
 	})();
 
-	modal.onClose(() => {
-		ns.exit();
-	});
-	ns.atExit(() => {
-		modal.close();
-	});
+	modal.hookExit(ns);
 
 	const actions: [() => boolean, () => void | Promise<void>][] = [
 		[
