@@ -36,6 +36,16 @@ const makeClosable = (container: HTMLElement, closer: HTMLElement) => {
 	};
 };
 
+const makeMinimizable = (body: HTMLElement, minimizer: HTMLElement) => {
+	let isMinimized = false;
+
+	minimizer.onclick = (ev) => {
+		ev.preventDefault();
+		isMinimized = !isMinimized;
+		body.style.display = isMinimized ? "none" : "block";
+	};
+};
+
 const makeDraggable = (
 	Document: Document,
 	container: HTMLElement,
@@ -95,35 +105,32 @@ const createHeader = (Document: Document, container: HTMLDivElement) => {
 	headerEl.appendChild(titleEl);
 	titleEl.style.flex = "1 0 0";
 
-	const closeEl = Document.createElement("div");
-	headerEl.appendChild(closeEl);
+	const buttonEl = Document.createElement("div");
+	headerEl.append(buttonEl);
+
+	const minimizeEl = Document.createElement("span");
+	buttonEl.append(minimizeEl);
+	minimizeEl.innerText = "[-]";
+
+	const closeEl = Document.createElement("span");
+	buttonEl.appendChild(closeEl);
 	closeEl.innerText = "[x]";
 
-	makeDraggable(Document, container, headerEl);
-	const { onClose, close } = makeClosable(container, closeEl);
-
-	const setTitle = (title: string) => {
-		titleEl.innerText = title;
-	};
-
 	return {
-		setTitle,
-		onClose,
-		close,
+		headerEl,
+		titleEl,
+		minimizeEl,
+		closeEl,
 	};
 };
 
 const createBody = (Document: Document, container: HTMLDivElement) => {
-	const body = Document.createElement("div");
-	container.appendChild(body);
-	body.style.padding = "0.5em";
-
-	const render = (element: React.ReactElement) => {
-		ReactDOM.render(element, body);
-	};
+	const bodyEl = Document.createElement("div");
+	container.appendChild(bodyEl);
+	bodyEl.style.padding = "0.5em";
 
 	return {
-		render,
+		bodyEl,
 	};
 };
 
@@ -132,8 +139,23 @@ export const createModal = () => {
 	const Document = globalThis["document"];
 
 	const container = createContainer(Document);
-	const { setTitle, onClose, close } = createHeader(Document, container);
-	const { render } = createBody(Document, container);
+	const { headerEl, titleEl, minimizeEl, closeEl } = createHeader(
+		Document,
+		container,
+	);
+	const { bodyEl } = createBody(Document, container);
+
+	makeDraggable(Document, container, headerEl);
+	makeMinimizable(bodyEl, minimizeEl);
+	const { onClose, close } = makeClosable(container, closeEl);
+
+	const setTitle = (title: string) => {
+		titleEl.innerText = title;
+	};
+
+	const render = (element: React.ReactElement) => {
+		ReactDOM.render(element, bodyEl);
+	};
 
 	const hookExit = (ns: NS) => {
 		onClose(() => {
